@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Job Portal</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #ffffff;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .content {
+            padding: 30px 20px;
+        }
+        .greeting {
+            font-size: 18px;
+            color: #667eea;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .info-box {
+            background-color: #f9f9f9;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .info-box p {
+            margin: 8px 0;
+            font-size: 14px;
+        }
+        .info-box strong {
+            color: #667eea;
+        }
+        .next-steps {
+            margin: 25px 0;
+        }
+        .next-steps h3 {
+            color: #667eea;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+        .next-steps ol {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .next-steps li {
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #555;
+        }
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #ffffff;
+            padding: 12px 30px;
+            border-radius: 4px;
+            text-decoration: none;
+            margin: 20px 0;
+            font-weight: bold;
+            text-align: center;
+        }
+        .cta-button:hover {
+            opacity: 0.9;
+        }
+        .footer {
+            background-color: #f5f5f5;
+            padding: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            border-top: 1px solid #eee;
+        }
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🎉 Welcome to Job Portal!</h1>
+        </div>
+        
+        <!-- Content -->
+        <div class="content">
+            <div class="greeting">Hello {{ user_name }}! 👋</div>
+            
+            <p>We're thrilled to have you join our job search community! Your account has been successfully created and is ready to use.</p>
+            
+            <!-- Account Information -->
+            <div class="info-box">
+                <p><strong>📧 Email:</strong> {{ email }}</p>
+                <p><strong>👤 Username:</strong> {{ username }}</p>
+                <p><strong>🚀 Status:</strong> Active and Ready!</p>
+            </div>
+            
+            <!-- Next Steps -->
+            <div class="next-steps">
+                <h3>🎯 Your Next Steps:</h3>
+                <ol>
+                    <li><strong>Complete Your Profile:</strong> Add your skills, experience, and portfolio to stand out to employers.</li>
+                    <li><strong>Browse Available Jobs:</strong> Explore opportunities that match your expertise and interests.</li>
+                    <li><strong>Apply to Jobs:</strong> Start applying to positions that excite you.</li>
+                    <li><strong>Save Your Favorites:</strong> Bookmark jobs to apply to later or track your favorites.</li>
+                    <li><strong>Get Discovered:</strong> Employers can search for top talent profiles like yours!</li>
+                </ol>
+            </div>
+            
+            <!-- Call to Action Button -->
+            <div style="text-align: center;">
+                <a href="{{ jobs_url }}" class="cta-button">Start Browsing Jobs</a>
+            </div>
+            
+            <!-- Additional Info -->
+            <p style="margin-top: 30px; font-size: 14px; color: #666;">
+                <strong>💡 Pro Tip:</strong> A complete profile increases your chances of being discovered by recruiters. 
+                Make sure to add a professional photo, detailed work experience, and relevant skills!
+            </p>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p>
+                Visit us: <a href="{{ portal_url }}">Job Portal</a> | 
+                <a href="{{ portal_url }}/about">About</a> | 
+                <a href="{{ portal_url }}/contact">Contact Us</a>
+            </p>
+            <p style="margin-top: 15px;">© 2025 Job Portal. All rights reserved. | We're here to help you find your dream job!</p>
+        </div>
+    </div>
+</body>
+</html>

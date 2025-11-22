@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Complete - Job Portal</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: #ffffff;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .content {
+            padding: 30px 20px;
+        }
+        .success-badge {
+            display: inline-block;
+            background-color: #38ef7d;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+            width: 90%;
+        }
+        .greeting {
+            font-size: 18px;
+            color: #11998e;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .benefits {
+            background-color: #f0f9f8;
+            border-left: 4px solid #11998e;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .benefits h3 {
+            color: #11998e;
+            margin-top: 0;
+            font-size: 16px;
+        }
+        .benefit-item {
+            display: flex;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+        .benefit-icon {
+            color: #38ef7d;
+            font-weight: bold;
+            margin-right: 10px;
+            min-width: 20px;
+        }
+        .pro-tips {
+            background-color: #fff9f0;
+            border-left: 4px solid #ffa500;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .pro-tips h3 {
+            color: #ffa500;
+            margin-top: 0;
+            font-size: 16px;
+        }
+        .tip-item {
+            display: flex;
+            margin-bottom: 10px;
+            font-size: 13px;
+            color: #555;
+        }
+        .tip-icon {
+            color: #ffa500;
+            font-weight: bold;
+            margin-right: 10px;
+            min-width: 20px;
+        }
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: #ffffff;
+            padding: 12px 30px;
+            border-radius: 4px;
+            text-decoration: none;
+            margin: 20px auto;
+            font-weight: bold;
+            text-align: center;
+            width: 90%;
+        }
+        .cta-button:hover {
+            opacity: 0.9;
+        }
+        .footer {
+            background-color: #f5f5f5;
+            padding: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            border-top: 1px solid #eee;
+        }
+        .footer a {
+            color: #11998e;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>✅ Your Profile is Complete!</h1>
+        </div>
+        
+        <!-- Content -->
+        <div class="content">
+            <div class="success-badge">🎉 Congratulations, {{ user_name }}!</div>
+            
+            <p>Your job seeker profile is now complete and visible to employers. This is a huge step towards finding your next opportunity!</p>
+            
+            <!-- Benefits -->
+            <div class="benefits">
+                <h3>What You Can Now Do:</h3>
+                <div class="benefit-item">
+                    <span class="benefit-icon">✓</span>
+                    <span>View your complete profile and how employers see it</span>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-icon">✓</span>
+                    <span>Browse and apply to unlimited job openings</span>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-icon">✓</span>
+                    <span>Save your favorite jobs for later</span>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-icon">✓</span>
+                    <span>Get recommended for matching positions</span>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-icon">✓</span>
+                    <span>Track your application history and status</span>
+                </div>
+            </div>
+            
+            <!-- Pro Tips -->
+            <div class="pro-tips">
+                <h3>💡 Pro Tips to Get More Interview Calls:</h3>
+                <div class="tip-item">
+                    <span class="tip-icon">→</span>
+                    <span>Keep your skills updated - add new certifications and experiences as you gain them</span>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">→</span>
+                    <span>Add a professional photo to increase profile visibility by 5x</span>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">→</span>
+                    <span>Update your headline to reflect your current expertise and career goals</span>
+                </div>
+                <div class="tip-item">
+                    <span class="tip-icon">→</span>
+                    <span>Be active - apply to jobs regularly to stay visible in employer searches</span>
+                </div>
+            </div>
+            
+            <!-- Call to Action Button -->
+            <a href="{{ profile_url }}" class="cta-button">View Your Profile</a>
+            
+            <!-- Additional Info -->
+            <p style="margin-top: 30px; font-size: 14px; color: #666; text-align: center;">
+                Ready to explore opportunities? <a href="{{ jobs_url }}" style="color: #11998e; text-decoration: none;">Browse Jobs Now</a>
+            </p>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p>
+                Portal: <a href="{{ portal_url }}">Job Portal</a> | 
+                Questions? <a href="{{ portal_url }}/contact">Contact Support</a>
+            </p>
+            <p style="margin-top: 15px;">© 2025 Job Portal. Your career partner in finding the perfect job!</p>
+        </div>
+    </div>
+</body>
+</html>

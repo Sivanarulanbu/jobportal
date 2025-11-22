@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Job Portal Employer Dashboard</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #ffffff;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .content {
+            padding: 30px 20px;
+        }
+        .greeting {
+            font-size: 18px;
+            color: #667eea;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .info-box {
+            background-color: #f9f9f9;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .info-box p {
+            margin: 8px 0;
+            font-size: 14px;
+        }
+        .info-box strong {
+            color: #667eea;
+        }
+        .features {
+            background-color: #f0f4ff;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .features h3 {
+            color: #667eea;
+            margin-top: 0;
+            font-size: 16px;
+        }
+        .feature-item {
+            display: flex;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+        .feature-icon {
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 10px;
+            min-width: 20px;
+        }
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #ffffff;
+            padding: 12px 30px;
+            border-radius: 4px;
+            text-decoration: none;
+            margin: 20px 0;
+            font-weight: bold;
+            text-align: center;
+            width: 88%;
+        }
+        .cta-button:hover {
+            opacity: 0.9;
+        }
+        .next-steps {
+            margin: 25px 0;
+        }
+        .next-steps h3 {
+            color: #667eea;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+        .next-steps ol {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .next-steps li {
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #555;
+        }
+        .footer {
+            background-color: #f5f5f5;
+            padding: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            border-top: 1px solid #eee;
+        }
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🎊 Welcome to Job Portal Employer!</h1>
+        </div>
+        
+        <!-- Content -->
+        <div class="content">
+            <div class="greeting">Hello {{ user_name }}! 👋</div>
+            
+            <p>Welcome to the Job Portal Employer Dashboard! We're excited to have {{ company_name }} on board. Your employer account is now active and ready to use.</p>
+            
+            <!-- Account Information -->
+            <div class="info-box">
+                <p><strong>🏢 Company:</strong> {{ company_name }}</p>
+                <p><strong>📧 Email:</strong> {{ email }}</p>
+                <p><strong>👤 Contact:</strong> {{ user_name }}</p>
+                <p><strong>🚀 Status:</strong> Active and Ready to Hire!</p>
+            </div>
+            
+            <!-- Features -->
+            <div class="features">
+                <h3>What You Can Do Now:</h3>
+                <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>Post unlimited job openings</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>Search and browse qualified job seekers</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>Review and manage applications</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>Communicate with candidates directly</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>Track hiring pipeline and analytics</span>
+                </div>
+            </div>
+            
+            <!-- Call to Action Button -->
+            <div style="text-align: center;">
+                <a href="{{ dashboard_url }}" class="cta-button">Go to Dashboard</a>
+            </div>
+            
+            <!-- Next Steps -->
+            <div class="next-steps">
+                <h3>🎯 Getting Started:</h3>
+                <ol>
+                    <li><strong>Complete Company Profile:</strong> Add your company details, logo, and description to make a great impression.</li>
+                    <li><strong>Create Your First Job Posting:</strong> Start recruiting by posting your open positions.</li>
+                    <li><strong>Browse Candidates:</strong> Search our database of talented job seekers.</li>
+                    <li><strong>Start Hiring:</strong> Review applications and connect with candidates.</li>
+                    <li><strong>Manage Team:</strong> Add team members to help with recruitment.</li>
+                </ol>
+            </div>
+            
+            <!-- Additional Info -->
+            <p style="margin-top: 30px; font-size: 14px; color: #666;">
+                <strong>💡 Pro Tip:</strong> A complete company profile with high-quality job descriptions attracts top talent. 
+                Make sure to include job responsibilities, required skills, and growth opportunities!
+            </p>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p>
+                Visit us: <a href="{{ portal_url }}">Job Portal</a> | 
+                <a href="{{ portal_url }}/contact">Contact Support</a> | 
+                <a href="{{ portal_url }}/about">Learn More</a>
+            </p>
+            <p style="margin-top: 15px;">© 2025 Job Portal. Connecting top talent with great companies!</p>
+        </div>
+    </div>
+</body>
+</html>
