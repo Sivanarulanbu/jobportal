@@ -52,9 +52,9 @@ def send_job_seeker_welcome_email(sender, instance, created, **kwargs):
                 'user_name': user.first_name or user.username,
                 'email': user.email,
                 'username': user.username,
-                'portal_url': 'http://localhost:5173',
-                'jobs_url': 'http://localhost:5173/jobs',
-                'profile_url': 'http://localhost:5173/profile',
+                'portal_url': settings.FRONTEND_URL,
+                'jobs_url': f'{settings.FRONTEND_URL}/jobs',
+                'profile_url': f'{settings.FRONTEND_URL}/profile',
             }
             
             html_message = render_to_string('emails/job_seeker_welcome.html', context)
@@ -102,9 +102,9 @@ def send_profile_completion_email(sender, instance, **kwargs):
             
             context = {
                 'user_name': user.first_name or user.username,
-                'profile_url': 'http://localhost:5173/profile',
-                'jobs_url': 'http://localhost:5173/jobs',
-                'portal_url': 'http://localhost:5173',
+                'profile_url': f'{settings.FRONTEND_URL}/profile',
+                'jobs_url': f'{settings.FRONTEND_URL}/jobs',
+                'portal_url': settings.FRONTEND_URL,
             }
             
             html_message = render_to_string('emails/job_seeker_profile_complete.html', context)
@@ -171,8 +171,8 @@ def send_employer_welcome_email(sender, instance, created, **kwargs):
                 'company_name': instance.company_name,
                 'user_name': user.first_name or user.username,
                 'email': user.email,
-                'portal_url': 'http://localhost:5173',
-                'dashboard_url': 'http://localhost:5173/employer/dashboard',
+                'portal_url': settings.FRONTEND_URL,
+                'dashboard_url': f'{settings.FRONTEND_URL}/employer/dashboard',
             }
             
             html_message = render_to_string('emails/employer_welcome.html', context)

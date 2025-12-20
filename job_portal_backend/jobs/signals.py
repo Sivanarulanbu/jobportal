@@ -22,10 +22,19 @@ def send_email_thread(subject, html_message, plain_message, recipient_list):
         msg = EmailMultiAlternatives(subject, plain_message, settings.DEFAULT_FROM_EMAIL, recipient_list)
         msg.attach_alternative(html_message, "text/html")
 
-        # Path to logo - adjusted to point to the frontend public directory
-        # BASE_DIR is usually the backend root, so we go up one level
+        # Path to logo
+        # Try development path first
         logo_path = os.path.join(settings.BASE_DIR, '..', 'job-portal-frontend', 'public', 'favicon_clean.png')
         
+        # If not found (production/docker), try static root or build dir
+        if not os.path.exists(logo_path):
+            # Try collected static files (assuming runserver/gunicorn has run collectstatic)
+            logo_path = os.path.join(settings.STATIC_ROOT, 'favicon_clean.png')
+            
+            if not os.path.exists(logo_path):
+                 # Try directly in build/ which we copy to in Docker
+                 logo_path = os.path.join(settings.BASE_DIR, 'build', 'favicon_clean.png')
+
         if os.path.exists(logo_path):
             with open(logo_path, 'rb') as f:
                 logo_data = f.read()
@@ -34,7 +43,7 @@ def send_email_thread(subject, html_message, plain_message, recipient_list):
             logo.add_header('Content-Disposition', 'inline', filename='logo.png')
             msg.attach(logo)
         else:
-            logger.warning(f"⚠️ Logo not found at {logo_path}")
+            logger.warning(f"⚠️ Logo not found at any checked path. Last checked: {logo_path}")
 
         msg.send()
         logger.info(f"✅ Email sent successfully to {recipient_list}")
@@ -94,8 +103,8 @@ def send_employee_welcome_email(user):
             'username': user.username,
             'email': user.email,
             'user_type': user_type_display,
-            'portal_url': 'http://localhost:5173',
-            'dashboard_url': 'http://localhost:5173/jobs',
+            'portal_url': settings.FRONTEND_URL,
+            'dashboard_url': f'{settings.FRONTEND_URL}/jobs',
         }
         
         html_message = render_to_string('emails/welcome_email.html', context)
@@ -133,8 +142,8 @@ def send_profile_email(user):
         context = {
             'user_name': user.first_name or user.username,
             'user_type': user_type_display,
-            'portal_url': 'http://localhost:5173',
-            'profile_url': 'http://localhost:5173/profile',
+            'portal_url': settings.FRONTEND_URL,
+            'profile_url': f'{settings.FRONTEND_URL}/profile',
         }
         
         html_message = render_to_string('emails/profile_email.html', context)
@@ -170,8 +179,8 @@ def send_job_posted_email(job):
             'employer_name': job.employer.first_name or job.employer.username,
             'job_title': job.title,
             'company_name': job.company,
-            'job_url': f'http://localhost:5173/jobs/{job.id}',
-            'portal_url': 'http://localhost:5173',
+            'job_url': f'{settings.FRONTEND_URL}/jobs/{job.id}',
+            'portal_url': settings.FRONTEND_URL,
         }
         
         html_message = render_to_string('emails/job_posted_email.html', context)

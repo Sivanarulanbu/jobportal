@@ -11,6 +11,11 @@ DEBUG = True
 SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-your-secret-key-change-this')
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1,*').split(',')
 
+if 'RENDER_EXTERNAL_HOSTNAME' in os.environ:
+    FRONTEND_URL = f"https://{os.environ['RENDER_EXTERNAL_HOSTNAME']}"
+else:
+    FRONTEND_URL = "http://localhost:5173"
+
 # Installed Apps
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -26,8 +31,8 @@ INSTALLED_APPS = [
     'corsheaders',
 
     # Local apps
-    'jobs',
-    'accounts',
+    'jobs.apps.JobsConfig',
+    'accounts.apps.AccountsConfig',
 ]
 
 # Middleware
