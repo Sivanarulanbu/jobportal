@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .email-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .content {
+            padding: 40px 20px;
+        }
+
+        .greeting {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .message {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: #667eea;
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+
+        .cta-button:hover {
+            background-color: #764ba2;
+        }
+
+        .account-info {
+            background-color: #f9f9f9;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .account-info p {
+            margin: 8px 0;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .footer {
+            background-color: #f5f5f5;
+            padding: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="email-container">
+        <div class="header">
+            <center>
+                <img src="cid:logo" alt="DreamRoute Logo" width="60" height="60"
+                    style="margin-bottom: 20px; display: block; border-radius: 50%; background: rgba(255,255,255,0.2); padding: 5px;">
+            </center>
+            <h1>🎉 Welcome to DreamRoute!</h1>
+        </div>
+
+        <div class="content">
+            <p class="greeting">Hello {{ user_name }},</p>
+
+            <p class="message">
+                Welcome to <strong>DreamRoute</strong>! We're thrilled to have you join our community of job seekers and
+                employers.
+                Whether you're looking for your next opportunity or searching for top talent, you've come to the right
+                place.
+            </p>
+
+            <div class="account-info">
+                <p><strong>Account Details:</strong></p>
+                <p>📧 <strong>Email:</strong> {{ email }}</p>
+                <p>👤 <strong>Username:</strong> {{ username }}</p>
+            </div>
+
+            <p class="message">
+                Here's what you can do next:
+            </p>
+
+            <ul style="color: #666; line-height: 1.8;">
+                <li>Complete your profile to get noticed by employers</li>
+                <li>Browse thousands of job listings</li>
+                <li>Apply to positions that match your skills</li>
+                <li>Save jobs for later</li>
+                <li>Connect with leading companies</li>
+            </ul>
+
+            <p style="text-align: center;">
+                <a href="{{ dashboard_url }}" class="cta-button">Start Browsing Jobs</a>
+            </p>
+
+            <p class="message">
+                If you have any questions or need assistance, our support team is here to help.
+                Just reply to this email or visit our help center.
+            </p>
+
+            <p class="message">
+                Happy job hunting! 🚀
+            </p>
+
+            <p style="color: #999; font-size: 14px; margin-top: 30px;">
+                Best regards,<br>
+                <strong>The Job Portal Team</strong>
+            </p>
+        </div>
+
+        <div class="footer">
+            <p>© 2025 Job Portal. All rights reserved.</p>
+            <p>
+                <a href="{{ portal_url }}">Visit Portal</a> |
+                <a href="{{ portal_url }}/about">About Us</a> |
+                <a href="{{ portal_url }}/contact">Contact</a>
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

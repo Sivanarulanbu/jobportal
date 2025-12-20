@@ -1,0 +1,359 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* -------------------------------------------------
+   Base Reset
+------------------------------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  line-height: 1.6;
+  background-color: #FFFFFF;
+  color: #191919;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+  color: #191919;
+  letter-spacing: -0.02em;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+/* -------------------------------------------------
+   Brand Colors (Professional Blue + White Theme)
+------------------------------------------------- */
+:root {
+  --primary: #0A66C2;
+  /* LinkedIn Blue */
+  --primary-dark: #004182;
+  /* Dark Blue */
+  --primary-light: #378FE9;
+  /* Light Blue */
+  --secondary: #FFFFFF;
+  /* White */
+  --surface: #F9FAFB;
+  /* Light Surface */
+  --accent: #F3F4F6;
+  /* Light Gray */
+  --success: #057642;
+  --danger: #CC1016;
+  --warning: #915907;
+  --dark: #191919;
+  --light: #FFFFFF;
+  --text: #191919;
+  --text-secondary: #666666;
+  --border: #E5E5E5;
+}
+
+/* -------------------------------------------------
+   Layout Containers
+------------------------------------------------- */
+.container {
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  background-color: var(--secondary);
+}
+
+/* -------------------------------------------------
+   Navbar
+------------------------------------------------- */
+nav {
+  background: var(--secondary);
+  color: var(--dark);
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid var(--border);
+}
+
+/* -------------------------------------------------
+   Footer
+------------------------------------------------- */
+footer {
+  background: #1B1F23;
+  color: #FFFFFF;
+  text-align: left;
+  padding: 0;
+  margin-top: 0;
+  border-top: none;
+}
+
+/* -------------------------------------------------
+   Button Utilities
+------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.625rem 1.25rem;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.12);
+}
+
+.btn:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--primary);
+  border: 1.5px solid var(--primary);
+  box-shadow: none;
+}
+
+.btn-secondary:hover {
+  background-color: rgba(10, 102, 194, 0.08);
+  box-shadow: none;
+}
+
+.btn-white {
+  background-color: white;
+  color: var(--dark);
+  border: 1px solid var(--border);
+}
+
+.btn-white:hover {
+  background-color: var(--surface);
+}
+
+/* -------------------------------------------------
+   Card Utilities
+------------------------------------------------- */
+.card {
+  background: white;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-color: #D1D5DB;
+}
+
+.card-interactive {
+  cursor: pointer;
+}
+
+.card-interactive:hover {
+  transform: translateY(-2px);
+}
+
+/* -------------------------------------------------
+   Input Utilities
+------------------------------------------------- */
+.input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background-color: white;
+  color: var(--dark);
+  transition: all 0.2s ease;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(10, 102, 194, 0.15);
+}
+
+.input::placeholder {
+  color: #9CA3AF;
+}
+
+.input-lg {
+  padding: 1rem 1.25rem;
+  font-size: 1.0625rem;
+}
+
+/* -------------------------------------------------
+   Scrollbar
+------------------------------------------------- */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #C4C4C4;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #A0A0A0;
+}
+
+/* Hide scrollbar utility */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* -------------------------------------------------
+   Typography Utilities
+------------------------------------------------- */
+.text-primary {
+  color: var(--primary);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.text-dark {
+  color: var(--dark);
+}
+
+/* -------------------------------------------------
+   Legacy Utility Classes
+------------------------------------------------- */
+.flex {
+  display: flex;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.py-12 {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.py-6 {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.rounded-full {
+  border-radius: 9999px;
+}
+
+.h-12 {
+  height: 3rem;
+}
+
+.w-12 {
+  width: 3rem;
+}
+
+.border-t-2 {
+  border-top-width: 2px;
+}
+
+.border-b-2 {
+  border-bottom-width: 2px;
+}
+
+/* Spinner */
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* -------------------------------------------------
+   Responsive Breakpoints Reference
+   sm: 640px, md: 768px, lg: 1024px, xl: 1280px
+------------------------------------------------- */

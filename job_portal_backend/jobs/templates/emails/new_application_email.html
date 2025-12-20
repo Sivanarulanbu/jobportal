@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 5px 5px 0 0;
+        }
+
+        .content {
+            background: #f9f9f9;
+            padding: 30px;
+            border: 1px solid #ddd;
+        }
+
+        .applicant-details {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid #667eea;
+        }
+
+        .button {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <center>
+                <img src="cid:logo" alt="DreamRoute Logo" width="60" height="60"
+                    style="margin-bottom: 10px; display: block;">
+            </center>
+            <h1 style="margin: 0;">📬 New Application Received!</h1>
+        </div>
+
+        <div class="content">
+            <p>Hi {{ employer_name }},</p>
+
+            <p>You have received a new application for your job posting. Here are the details:</p>
+
+            <div class="applicant-details">
+                <h3 style="color: #667eea; margin-top: 0;">👤 Applicant Information:</h3>
+                <p><strong>Job Title:</strong> {{ job_title }}</p>
+                <p><strong>Applicant Name:</strong> {{ applicant_name }}</p>
+                <p><strong>Email:</strong> {{ applicant_email }}</p>
+                <p><strong>Submission Date:</strong> Today</p>
+            </div>
+
+            <p>You can now review the applicant's profile, resume, and qualifications from your employer dashboard.</p>
+
+            <center>
+                <a href="{{ portal_url }}/employer/applications" class="button">Review Applications →</a>
+            </center>
+
+            <p><strong>Quick Actions:</strong></p>
+            <ul>
+                <li>Review the applicant's resume and profile</li>
+                <li>Update application status (Shortlist, Reject, Accept)</li>
+                <li>Send messages or schedule interviews</li>
+                <li>Compare with other applicants</li>
+            </ul>
+
+            <p>Remember, the faster you respond to qualified candidates, the higher your chances of securing top talent!
+            </p>
+
+            <p>Best regards,<br><strong>The DreamRoute Team</strong></p>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2025 DreamRoute. All rights reserved.</p>
+            <p>This is an automated email. Please do not reply to this email.</p>
+        </div>
+    </div>
+</body>
+
+</html>

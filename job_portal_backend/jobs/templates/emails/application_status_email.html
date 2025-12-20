@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; text-align: center; border-radius: 5px 5px 0 0; }
+        .content { background: #f9f9f9; padding: 30px; border: 1px solid #ddd; }
+        .status-box { background: white; padding: 20px; margin: 20px 0; border-left: 4px solid #667eea; text-align: center; }
+        .status-badge { display: inline-block; padding: 10px 20px; border-radius: 5px; font-weight: bold; font-size: 18px; margin: 10px 0; }
+        .pending { background: #fff3cd; color: #856404; }
+        .reviewed { background: #d1ecf1; color: #0c5460; }
+        .shortlisted { background: #d4edda; color: #155724; }
+        .accepted { background: #d4edda; color: #155724; }
+        .rejected { background: #f8d7da; color: #721c24; }
+        .job-details { background: white; padding: 20px; margin: 20px 0; border-left: 4px solid #667eea; }
+        .button { display: inline-block; background: #667eea; color: white; padding: 12px 30px; text-decoration: none; border-radius: 5px; margin: 20px 0; }
+        .footer { text-align: center; padding: 20px; color: #666; font-size: 12px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Application Status Update</h1>
+        </div>
+        
+        <div class="content">
+            <p>Hi {{ applicant_name }},</p>
+            
+            <p>We have an update on your application for the following position:</p>
+            
+            <div class="job-details">
+                <h3 style="color: #667eea; margin-top: 0;">📋 Position:</h3>
+                <p><strong>Job Title:</strong> {{ job_title }}</p>
+                <p><strong>Company:</strong> {{ company_name }}</p>
+            </div>
+            
+            <div class="status-box">
+                <p style="margin: 0; color: #666;">Your Application Status:</p>
+                <div class="status-badge {{ status|lower }}">{{ status }}</div>
+            </div>
+            
+            {% if status == 'shortlisted' %}
+            <p>🎉 Congratulations! Your application has been shortlisted. The employer will contact you soon with the next steps, which may include interviews or assessments.</p>
+            {% elif status == 'accepted' %}
+            <p>🎉 Excellent news! Your application has been accepted. Please check your email for further instructions from the employer.</p>
+            {% elif status == 'rejected' %}
+            <p>Thank you for your interest in this position. While we were impressed with your profile, the employer has decided to move forward with other candidates. Don't get discouraged—there are many more opportunities on DreamRoute!</p>
+            {% elif status == 'reviewed' %}
+            <p>Your application has been reviewed by the employer. We'll keep you updated on the next steps.</p>
+            {% else %}
+            <p>{{ status_message }}</p>
+            {% endif %}
+            
+            <center>
+                <a href="{{ portal_url }}" class="button">Check Your Status →</a>
+            </center>
+            
+            {% if status == 'rejected' %}
+            <p><strong>Keep exploring:</strong> There are many more exciting opportunities available on DreamRoute. Don't let this stop you from pursuing your dream job!</p>
+            <center>
+                <a href="{{ portal_url }}/jobs" class="button">Browse More Jobs →</a>
+            </center>
+            {% endif %}
+            
+            <p>If you have any questions, feel free to reach out to our support team.</p>
+            
+            <p>Best regards,<br><strong>The DreamRoute Team</strong></p>
+        </div>
+        
+        <div class="footer">
+            <p>&copy; 2025 DreamRoute. All rights reserved.</p>
+            <p>This is an automated email. Please do not reply to this email.</p>
+        </div>
+    </div>
+</body>
+</html>
