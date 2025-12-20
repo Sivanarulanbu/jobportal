@@ -129,7 +129,7 @@ export default function Register() {
     <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-4">
 
       {/* Main Card */}
-      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-5xl overflow-hidden flex flex-col md:flex-row min-h-[600px] animate-fade-in-up">
+      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-4xl overflow-hidden flex flex-col md:flex-row min-h-[500px] animate-fade-in-up">
 
         {/* Left Side - Branding */}
         <div className="hidden md:flex flex-col justify-between w-2/5 bg-gradient-to-br from-indigo-600 to-violet-700 p-12 text-white relative overflow-hidden">
