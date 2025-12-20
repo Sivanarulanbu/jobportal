@@ -205,7 +205,7 @@ def send_job_deleted_notification(sender, instance, **kwargs):
         context = {
             'employer_name': instance.employer.first_name or instance.employer.username,
             'job_title': instance.title,
-            'portal_url': 'http://localhost:5173',
+            'portal_url': settings.FRONTEND_URL,
         }
         
         html_message = render_to_string('emails/job_deleted_email.html', context)
@@ -242,7 +242,7 @@ def send_application_submitted_email(application):
             'applicant_name': application.applicant.first_name or application.applicant.username,
             'job_title': application.job.title,
             'company_name': application.job.company,
-            'portal_url': 'http://localhost:5173',
+            'portal_url': settings.FRONTEND_URL,
         }
         
         html_message = render_to_string('emails/application_submitted_email.html', context)
@@ -260,7 +260,7 @@ def send_application_submitted_email(application):
             'job_title': application.job.title,
             'applicant_name': application.applicant.get_full_name() or application.applicant.username,
             'applicant_email': application.applicant.email,
-            'portal_url': 'http://localhost:5173',
+            'portal_url': settings.FRONTEND_URL,
         }
         
         employer_html_message = render_to_string('emails/new_application_email.html', employer_context)
@@ -305,7 +305,7 @@ def send_status_update_email(application):
             'company_name': application.job.company,
             'status': application.status.upper(),
             'status_message': status_display,
-            'portal_url': 'http://localhost:5173',
+            'portal_url': settings.FRONTEND_URL,
         }
         
         html_message = render_to_string('emails/application_status_email.html', context)
