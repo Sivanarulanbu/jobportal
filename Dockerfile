@@ -33,6 +33,9 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     && rm -rf /var/lib/apt/lists/*
 
+# Create nginx user if it doesn't exist (fixing getpwnam error)
+RUN groupadd -r nginx && useradd -r -g nginx nginx
+
 # Upgrade pip
 RUN pip install --upgrade pip setuptools wheel
 
