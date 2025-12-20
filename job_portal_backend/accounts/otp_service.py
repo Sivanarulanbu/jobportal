@@ -36,7 +36,18 @@ def send_otp_email(email, otp_code, purpose='registration'):
         )
         return True
     except Exception as e:
-        print(f"Error sending OTP email: {e}")
+        import logging
+        logger = logging.getLogger(__name__)
+        # Differentiate between common SMTP errors for clearer logs
+        error_msg = str(e)
+        if "Network is unreachable" in error_msg:
+            logger.error(f"❌ Network unreachable when sending OTP to {email}. Check port blocking (587/465) or firewall.")
+        elif "AuthenticationError" in error_msg or "Username and Password not accepted" in error_msg:
+             logger.error(f"❌ SMTP Authentication failed for {email}. Check EMAIL_HOST_USER/PASSWORD.")
+        else:
+            logger.error(f"❌ Failed to send OTP email to {email}: {error_msg}")
+        
+        # In production, we might want to return False but for now let's just log
         return False
 
 def create_otp(email, purpose='registration'):
