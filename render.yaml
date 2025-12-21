@@ -3,13 +3,13 @@ databases:
     databaseName: job_portal
     user: job_portal_user
     plan: free
-    region: singapore
+    region: oregon
 
 services:
   - type: web
     name: job-portal
     env: docker
-    region: singapore
+    region: oregon
     plan: free
     dockerContext: .
     dockerfilePath: Dockerfile
