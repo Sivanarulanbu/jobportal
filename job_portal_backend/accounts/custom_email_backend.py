@@ -10,6 +10,7 @@ class IPv4SMTP(smtplib.SMTP):
     """
     def _get_socket(self, host, port, timeout):
         # Create a socket using ONLY IPv4 (AF_INET)
+        print(f"DEBUG: IPv4SMTP Connecting to {host}:{port} with timeout={timeout}")
         if self.debuglevel > 0:
             print(f'connect: attempting IPv4 connection to {host}:{port}')
         
@@ -52,6 +53,7 @@ class IPv4SMTP_SSL(smtplib.SMTP_SSL):
     Custom SMTP_SSL class that forces IPv4 connection.
     """
     def _get_socket(self, host, port, timeout):
+        print(f"DEBUG: IPv4SMTP_SSL Connecting to {host}:{port} with timeout={timeout}")
         if self.debuglevel > 0:
             print(f'connect: attempting IPv4 SSL connection to {host}:{port}')
             
