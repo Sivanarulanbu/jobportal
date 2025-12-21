@@ -512,6 +512,7 @@ class OTPViewSet(viewsets.ViewSet):
         import socket
         import ssl
         from django.conf import settings
+        from django.utils import timezone
         
         results = {
             "ipv4_forced": True,
