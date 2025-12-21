@@ -74,7 +74,7 @@ TEMPLATES = [
 
 
 EMAIL_BACKEND = 'accounts.custom_email_backend.IPv4EmailBackend'
-EMAIL_HOST = os.getenv('EMAIL_HOST', 'smtp.gmail.com')
+EMAIL_HOST = os.getenv('EMAIL_HOST', 'smtp.googlemail.com')
 # Force settings to override potentially misconfigured Environment Variables in Render
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True

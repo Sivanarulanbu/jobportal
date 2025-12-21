@@ -504,6 +504,55 @@ class OTPViewSet(viewsets.ViewSet):
         
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
+    @action(detail=False, methods=['get'])
+    def test_connection(self, request):
+        """
+        Diagnostic endpoint to test SMTP connectivity from the server.
+        """
+        import socket
+        import ssl
+        from django.conf import settings
+        
+        results = {
+            "ipv4_forced": True,
+            "tests": []
+        }
+        
+        hosts = ['smtp.gmail.com', 'smtp.googlemail.com']
+        ports = [587, 465]
+        
+        for host in hosts:
+            for port in ports:
+                test_result = {"host": host, "port": port, "status": "unknown", "log": []}
+                try:
+                    # Resolve IP
+                    addr_info = socket.getaddrinfo(host, port, socket.AF_INET, socket.SOCK_STREAM)
+                    ip_address = addr_info[0][4][0]
+                    test_result["ip"] = ip_address
+                    test_result["log"].append(f"Resolved to {ip_address}")
+                    
+                    # Connect
+                    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                    sock.settimeout(10)
+                    start_time = timezone.now()
+                    sock.connect((ip_address, port))
+                    duration = (timezone.now() - start_time).total_seconds()
+                    
+                    test_result["status"] = "connected"
+                    test_result["latency"] = f"{duration}s"
+                    test_result["log"].append("TCP Connection established")
+                    
+                    sock.close()
+                    
+                except Exception as e:
+                    test_result["status"] = "failed"
+                    test_result["error"] = str(e)
+                    test_result["log"].append(f"Error: {str(e)}")
+                    
+                results["tests"].append(test_result)
+                
+        return Response(results, status=status.HTTP_200_OK)
+
     @action(detail=False, methods=['post'])
     def login_with_otp(self, request):
         """
