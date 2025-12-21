@@ -110,7 +110,15 @@ class IPv4EmailBackend(EmailBackend):
             
             # Additional setup that Django's EmailBackend usually does
             if not self.use_ssl and self.use_tls:
-                self.connection.starttls(keyfile=self.ssl_keyfile, certfile=self.ssl_certfile)
+                # Python 3.12 removed keyfile/certfile args from starttls
+                # Use context instead
+                if self.ssl_certfile or self.ssl_keyfile:
+                    import ssl
+                    context = ssl.create_default_context()
+                    context.load_cert_chain(self.ssl_certfile, self.ssl_keyfile)
+                    self.connection.starttls(context=context)
+                else:
+                    self.connection.starttls()
                 
             if self.username and self.password:
                 self.connection.login(self.username, self.password)

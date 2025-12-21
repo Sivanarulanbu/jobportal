@@ -80,7 +80,7 @@ EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', 'False') == 'True'
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'krishnananbu99@gmail.com').strip()
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', 'osyo xyua uvfq ggow').strip()
 DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'Jobportal <krishnananbu99@gmail.com>')
-EMAIL_TIMEOUT = 30  # Increased timeout
+EMAIL_TIMEOUT = 60  # Increased timeout for stability
 EMAIL_USE_SSL = os.getenv('EMAIL_USE_SSL', 'True') == 'True'
 
 DATABASES = {
