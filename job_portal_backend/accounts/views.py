@@ -520,6 +520,9 @@ class OTPViewSet(viewsets.ViewSet):
         }
         
         hosts = ['smtp.gmail.com', 'smtp.googlemail.com']
+        if hasattr(settings, 'EMAIL_HOST') and settings.EMAIL_HOST not in hosts:
+            hosts.append(settings.EMAIL_HOST)
+            
         ports = [587, 465]
         
         for host in hosts:
