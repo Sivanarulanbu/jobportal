@@ -105,9 +105,16 @@ export default function Register() {
           const messages = [];
           for (const [key, value] of Object.entries(data)) {
             const valStr = Array.isArray(value) ? value.join(", ") : String(value);
-            // Capitalize key
-            const keyName = key.charAt(0).toUpperCase() + key.slice(1);
-            messages.push(`${keyName}: ${valStr}`);
+            // Capitalize key or map to user friendly name
+            let keyName = key.charAt(0).toUpperCase() + key.slice(1);
+            if (key === 'otp_code') keyName = 'OTP';
+
+            // If there's only one error and it's OTP, just show the message
+            if (Object.keys(data).length === 1 && key === 'otp_code') {
+              messages.push(valStr);
+            } else {
+              messages.push(`${keyName}: ${valStr}`);
+            }
           }
           if (messages.length > 0) {
             errorMsg = messages.join(". ");
