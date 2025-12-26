@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            font-family: 'Helvetica', 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            background-color: #f9fafb;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .content {
+            padding: 30px 20px;
+            background-color: white;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #4f46e5;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Welcome to DreamRoute! 🚀</h1>
+        </div>
+        <div class="content">
+            <p>Hi {{ user_name }},</p>
+            <p>Welcome to <strong>DreamRoute</strong>! We're thrilled to have you join our community of professionals
+                and opportunities.</p>
+            <p>To get the most out of your job search, here are your next steps:</p>
+            <ul>
+                <li><strong>Complete Your Profile:</strong> A complete profile gets 3x more views from recruiters.</li>
+                <li><strong>Upload Your Resume:</strong> Ensure your latest CV is attached for easy applications.</li>
+                <li><strong>Browse Jobs:</strong> Explore thousands of job listings tailored to your skills.</li>
+            </ul>
+            <p style="text-align: center;">
+                <a href="{{ profile_url }}" class="button">Complete My Profile</a>
+            </p>
+            <p>If you have any questions, feel free to reply to this email.</p>
+            <p>Best regards,<br>The DreamRoute Team</p>
+        </div>
+        <div class="footer">
+            <p>&copy; 2025 DreamRoute. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+
+</html>

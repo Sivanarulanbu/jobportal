@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            font-family: 'Helvetica', 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            background-color: #f9fafb;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .content {
+            padding: 30px 20px;
+            background-color: white;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #10b981;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Profile 100% Complete! 🎉</h1>
+        </div>
+        <div class="content">
+            <p>Hi {{ user_name }},</p>
+            <p>Congratulations! Your profile on <strong>DreamRoute</strong> is now fully complete.</p>
+            <p><strong>Why this matters:</strong></p>
+            <ul>
+                <li>Your profile is now highlighted to top recruiters.</li>
+                <li>You are eligible for "Instant Match" job recommendations.</li>
+                <li>Employers are 5x more likely to contact candidates with complete profiles.</li>
+            </ul>
+            <p>Now is the perfect time to start applying!</p>
+            <p style="text-align: center;">
+                <a href="{{ jobs_url }}" class="button">Find My Dream Job</a>
+            </p>
+            <p>Good luck,<br>The DreamRoute Team</p>
+        </div>
+        <div class="footer">
+            <p>&copy; 2025 DreamRoute. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+
+</html>
