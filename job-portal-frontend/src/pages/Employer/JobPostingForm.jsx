@@ -47,8 +47,8 @@ export default function JobPostingForm() {
     setError("");
 
     // Validation
-    if (!formData.title || !formData.company || !formData.location || !formData.description) {
-      setError("Please fill in all required fields");
+    if (!formData.title || !formData.company || !formData.location || !formData.description || !formData.requirements) {
+      setError("Please fill in all required fields (including Requirements)");
       setLoading(false);
       return;
     }
@@ -69,7 +69,17 @@ export default function JobPostingForm() {
         navigate("/employer-dashboard");
       }, 2000);
     } catch (err) {
-      setError(err.response?.data?.detail || "Failed to post job. Please try again.");
+      // Check for field-specific errors (DRF standard format)
+      if (err.response?.data && typeof err.response.data === 'object' && !err.response.data.detail) {
+        // Create a readable error string from field errors
+        const fieldErrors = Object.entries(err.response.data)
+          .map(([key, value]) => `${key}: ${Array.isArray(value) ? value.join(' ') : value}`)
+          .join('\n');
+        setError(fieldErrors || "Failed to post job. Please check your inputs.");
+      } else {
+        // Fallback or generic detail error
+        setError(err.response?.data?.detail || "Failed to post job. Please try again.");
+      }
     } finally {
       setLoading(false);
     }
@@ -293,7 +303,7 @@ export default function JobPostingForm() {
 
           {/* Requirements */}
           <div style={formGroupStyle}>
-            <label style={labelStyle}>Requirements</label>
+            <label style={labelStyle}>Requirements *</label>
             <textarea
               name="requirements"
               value={formData.requirements}
