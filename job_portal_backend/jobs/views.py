@@ -156,11 +156,18 @@ class ApplicationViewSet(viewsets.ModelViewSet):
     
     def get_queryset(self):
         user = self.request.user
-        if user.profile.user_type == 'employer':
+        # Safely checks for user profile or assumes employer if user is superuser/staff
+        is_employer = False
+        if hasattr(user, 'profile'):
+            is_employer = user.profile.user_type == 'employer'
+        elif hasattr(user, 'employer'): # Check for Employer model from accounts
+            is_employer = True
+            
+        if is_employer:
             return Application.objects.filter(job__employer=user).select_related(
                 'job', 
                 'applicant', 
-                'applicant__job_seeker'
+                'applicant__profile' 
             )
         return Application.objects.filter(applicant=user).select_related('job')
     

@@ -101,13 +101,11 @@ class ApplicationSerializer(serializers.ModelSerializer):
         read_only_fields = ['status', 'applied_at', 'updated_at', 'job_title', 'applicant_name', 'applicant_email']
 
     def get_applicant_details(self, obj):
+        request = self.context.get('request')
+        
+        # 1. Try to get JobSeeker (from accounts app)
         try:
-            # Access the pre-fetched job_seeker relationship if available
-            # validation is handled by the try/except block as accessing a missing 
-            # reverse OneToOne relation raises an ObjectDoesNotExist (AttributeError in some contexts or RelatedObjectDoesNotExist)
             job_seeker = obj.applicant.job_seeker
-            
-            request = self.context.get('request')
             
             profile_resume_url = None
             if job_seeker.resume:
@@ -131,10 +129,39 @@ class ApplicationSerializer(serializers.ModelSerializer):
                 'profile_resume_url': profile_resume_url,
                 'profile_picture_url': profile_picture_url,
             }
-        except Exception as e:
-            # Fallback if JobSeeker profile doesn't exist
-            # print(f"Error fetching applicant details: {e}") 
-            return None
+        except Exception:
+            pass
+            
+        # 2. Fallback to UserProfile (from jobs app)
+        try:
+            profile = obj.applicant.profile
+            
+            profile_resume_url = None
+            if profile.resume:
+                profile_resume_url = request.build_absolute_uri(profile.resume.url) if request else profile.resume.url
+
+            profile_picture_url = None
+            if profile.profile_picture:
+                profile_picture_url = request.build_absolute_uri(profile.profile_picture.url) if request else profile.profile_picture.url
+
+            return {
+                'id': profile.id,
+                'phone': profile.phone,
+                'location': profile.location,
+                'bio': profile.bio,
+                'headline': None, # Not in UserProfile
+                'experience_level': None, # Not in UserProfile
+                'skills': [], # Not in UserProfile
+                'portfolio_url': profile.website,
+                'linkedin_url': None,
+                'github_url': None,
+                'profile_resume_url': profile_resume_url,
+                'profile_picture_url': profile_picture_url,
+            }
+        except Exception:
+            pass
+
+        return None
 
 
 class SavedJobSerializer(serializers.ModelSerializer):
