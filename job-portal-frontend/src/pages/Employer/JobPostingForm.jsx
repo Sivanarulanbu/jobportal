@@ -54,7 +54,7 @@ export default function JobPostingForm() {
     }
 
     try {
-      const response = await axiosInstance.post("/api/jobs/", {
+      const response = await axiosInstance.post("jobs/", {
         ...formData,
         salary_min: formData.salary_min ? parseFloat(formData.salary_min) : null,
         salary_max: formData.salary_max ? parseFloat(formData.salary_max) : null,
