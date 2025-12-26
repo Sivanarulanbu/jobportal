@@ -54,11 +54,15 @@ export default function JobPostingForm() {
     }
 
     try {
-      const response = await axiosInstance.post("jobs/", {
+      const payload = {
         ...formData,
         salary_min: formData.salary_min ? parseFloat(formData.salary_min) : null,
         salary_max: formData.salary_max ? parseFloat(formData.salary_max) : null,
-      });
+        deadline: formData.deadline ? formData.deadline : null,
+        experience_required: formData.experience_required || 'junior',
+      };
+
+      const response = await axiosInstance.post("jobs/", payload);
 
       setSuccess(true);
       setTimeout(() => {
