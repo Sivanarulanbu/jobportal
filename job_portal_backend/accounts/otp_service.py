@@ -42,11 +42,12 @@ def send_otp_email(email, otp_code, purpose='registration'):
         error_msg = str(e)
         if "Network is unreachable" in error_msg:
             logger.error(f"❌ Network unreachable when sending OTP to {email}. Check port blocking (587/465) or firewall.")
-            logger.error(f"DEBUG INFO: Host={settings.EMAIL_HOST}, Port={settings.EMAIL_PORT}, TLS={settings.EMAIL_USE_TLS}, SSL={settings.EMAIL_USE_SSL}")
         elif "AuthenticationError" in error_msg or "Username and Password not accepted" in error_msg:
              logger.error(f"❌ SMTP Authentication failed for {email}. Check EMAIL_HOST_USER/PASSWORD.")
         else:
             logger.error(f"❌ Failed to send OTP email to {email}: {error_msg}")
+        
+        logger.error(f"DEBUG INFO: Host={settings.EMAIL_HOST}, Port={settings.EMAIL_PORT}, TLS={settings.EMAIL_USE_TLS}, SSL={settings.EMAIL_USE_SSL}")
         
         # In production, we might want to return False but for now let's just log
         return False

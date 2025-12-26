@@ -495,6 +495,8 @@ class OTPViewSet(viewsets.ViewSet):
                     'message': 'Registration successful!',
                     'user': UserSerializer(user).data
                 }, status=status.HTTP_201_CREATED)
+            except serializers.ValidationError as e:
+                return Response(e.detail, status=status.HTTP_400_BAD_REQUEST)
             except Exception as e:
                 logger.error(f"Registration error: {e}")
                 return Response({
