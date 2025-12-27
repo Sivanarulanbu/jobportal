@@ -15,10 +15,12 @@ import {
 } from "lucide-react";
 import apiClient from "../utils/apiClient";
 import { useAuth } from "../hooks/useAuth";
+import { useToast } from "../context/ToastContext";
 
 export default function ProfileDashboard() {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
+  const { addToast } = useToast();
   const [profileData, setProfileData] = useState(null);
   const [savedJobs, setSavedJobs] = useState([]);
   const [applications, setApplications] = useState([]);
@@ -95,9 +97,9 @@ export default function ProfileDashboard() {
       // Refetch profile to get updated data
       const profileResponse = await apiClient.get("/accounts/job-seekers/my_profile/");
       setProfileData(profileResponse.data);
-      alert("Resume uploaded successfully!");
+      addToast("Resume uploaded successfully!", "success");
     } catch (error) {
-      alert(error.response?.data?.message || "Error uploading resume");
+      addToast(error.response?.data?.message || "Error uploading resume", "error");
     }
   };
 
@@ -114,9 +116,9 @@ export default function ProfileDashboard() {
       // Refetch profile to get updated data
       const profileResponse = await apiClient.get("/accounts/job-seekers/my_profile/");
       setProfileData(profileResponse.data);
-      alert("Profile picture updated!");
+      addToast("Profile picture updated!", "success");
     } catch (error) {
-      alert(error.response?.data?.message || "Error uploading profile picture");
+      addToast(error.response?.data?.message || "Error uploading profile picture", "error");
     }
   };
 
@@ -129,12 +131,12 @@ export default function ProfileDashboard() {
     try {
       await apiClient.put("/accounts/job-seekers/update_profile/", formData);
       setEditMode(false);
-      alert("Profile updated successfully!");
+      addToast("Profile updated successfully!", "success");
       const profileResponse = await apiClient.get("/accounts/job-seekers/my_profile/");
       setProfileData(profileResponse.data);
     } catch (error) {
       console.error("Error updating profile:", error);
-      alert("Failed to update profile.");
+      addToast("Failed to update profile.", "error");
     }
   };
 
@@ -144,7 +146,7 @@ export default function ProfileDashboard() {
 
     const normalizedSkill = skill.trim();
     if (skillsList.some(s => s.toLowerCase() === normalizedSkill.toLowerCase())) {
-      alert("Skill already exists!");
+      addToast("Skill already exists!", "error");
       return;
     }
 
@@ -161,9 +163,10 @@ export default function ProfileDashboard() {
       if (profileResponse.data?.profile?.skills_list) {
         setSkillsList(profileResponse.data.profile.skills_list);
       }
+      addToast("Skill added!", "success");
     } catch (error) {
       console.error("Error adding skill:", error);
-      alert("Failed to add skill.");
+      addToast("Failed to add skill.", "error");
     }
   };
 
@@ -181,9 +184,10 @@ export default function ProfileDashboard() {
       if (profileResponse.data?.profile?.skills_list) {
         setSkillsList(profileResponse.data.profile.skills_list);
       }
+      addToast("Skill removed.", "info");
     } catch (error) {
       console.error("Error removing skill:", error);
-      alert("Failed to remove skill.");
+      addToast("Failed to remove skill.", "error");
     }
   };
 
@@ -312,6 +316,46 @@ export default function ProfileDashboard() {
             {/* Profile Tab */}
             {activeTab === "profile" && (
               <div className="space-y-6">
+
+                {/* Profile Strength Bar */}
+                <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                  <div className="flex justify-between items-center mb-2">
+                    <h3 className="font-bold text-gray-800">Profile Strength</h3>
+                    <span className="font-bold text-sky-600">
+                      {(() => {
+                        let strength = 20; // Base strength
+                        if (profileData?.profile?.resume) strength += 20;
+                        if (profileData?.profile?.skills_list?.length > 0) strength += 15;
+                        if (user.first_name && user.last_name) strength += 10;
+                        if (formData.headline) strength += 15;
+                        if (formData.bio) strength += 10;
+                        if (profileData?.profile?.profile_picture) strength += 10;
+                        return Math.min(strength, 100);
+                      })()}%
+                    </span>
+                  </div>
+                  <div className="w-full bg-gray-200 rounded-full h-3">
+                    <div
+                      className="bg-sky-500 h-3 rounded-full transition-all duration-1000 ease-out"
+                      style={{
+                        width: `${(() => {
+                          let strength = 20;
+                          if (profileData?.profile?.resume) strength += 20;
+                          if (profileData?.profile?.skills_list?.length > 0) strength += 15;
+                          if (user.first_name && user.last_name) strength += 10;
+                          if (formData.headline) strength += 15;
+                          if (formData.bio) strength += 10;
+                          if (profileData?.profile?.profile_picture) strength += 10;
+                          return Math.min(strength, 100);
+                        })()}%`
+                      }}
+                    ></div>
+                  </div>
+                  <p className="text-sm text-gray-500 mt-2">
+                    Complete your profile to stand out to recruiters by adding skills, resume, and details.
+                  </p>
+                </div>
+
                 <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
                   <div className="flex items-center justify-between mb-6">
                     <h2 className="text-2xl font-bold text-gray-900">
@@ -444,8 +488,8 @@ export default function ProfileDashboard() {
                   </div>
 
                   {profileData?.profile?.resume ? (
-                    <div className="border border-gray-200 rounded-lg p-6 bg-gray-50">
-                      <div className="flex items-center gap-4">
+                    <div className="space-y-4">
+                      <div className="border border-gray-200 rounded-lg p-6 bg-gray-50 flex items-center gap-4">
                         <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
                           <FileText size={24} className="text-red-600" />
                         </div>
@@ -454,24 +498,53 @@ export default function ProfileDashboard() {
                             {profileData.profile.resume.split('/').pop()}
                           </p>
                           <p className="text-sm text-gray-500">
-                            {profileData.profile.resume.endsWith('.pdf') ? 'PDF Document' :
-                              profileData.profile.resume.endsWith('.doc') ? 'Word Document' :
-                                profileData.profile.resume.endsWith('.docx') ? 'Word Document' : 'Document'}
+                            Document Uploaded
                           </p>
                         </div>
-                        <a
-                          href={
-                            profileData.profile.resume.startsWith('http')
-                              ? profileData.profile.resume
-                              : `http://localhost:8000${profileData.profile.resume}`
-                          }
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white font-semibold rounded-lg transition"
-                        >
-                          View
-                        </a>
+                        {/* In-browser preview handling */}
+                        {profileData.profile.resume.toLowerCase().endsWith('.pdf') ? (
+                          <button
+                            onClick={() => {
+                              // Create an iframe to view it in modal or new window in a tailored way needed? 
+                              // Requirement: In-browser PDF Preview. A simple iframe toggle is best.
+                              const pdfUrl = profileData.profile.resume.startsWith('http')
+                                ? profileData.profile.resume
+                                : `http://localhost:8000${profileData.profile.resume}`;
+                              window.open(pdfUrl, '_blank', 'toolbar=0,location=0,menubar=0');
+                            }}
+                            className="px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white font-semibold rounded-lg transition"
+                          >
+                            Preview PDF
+                          </button>
+                        ) : (
+                          <a
+                            href={
+                              profileData.profile.resume.startsWith('http')
+                                ? profileData.profile.resume
+                                : `http://localhost:8000${profileData.profile.resume}`
+                            }
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white font-semibold rounded-lg transition"
+                          >
+                            Download
+                          </a>
+                        )}
                       </div>
+                      {/* Inline Preview for PDF */}
+                      {profileData.profile.resume.toLowerCase().endsWith('.pdf') && (
+                        <div className="w-full h-96 border border-gray-200 rounded-lg overflow-hidden bg-gray-50">
+                          <iframe
+                            src={
+                              profileData.profile.resume.startsWith('http')
+                                ? profileData.profile.resume
+                                : `http://localhost:8000${profileData.profile.resume}`
+                            }
+                            className="w-full h-full"
+                            title="Resume Preview"
+                          ></iframe>
+                        </div>
+                      )}
                     </div>
                   ) : (
                     <div
@@ -510,7 +583,9 @@ export default function ProfileDashboard() {
                       Add Skill
                     </button>
                   </div>
-                  <div className="flex flex-wrap gap-2">
+
+                  {/* Active Skills List */}
+                  <div className="flex flex-wrap gap-2 mb-6">
                     {skillsList && skillsList.length > 0 ? (
                       skillsList.map((skill) => (
                         <span
@@ -526,9 +601,67 @@ export default function ProfileDashboard() {
                         </span>
                       ))
                     ) : (
-                      <p className="text-gray-500 italic">No skills added yet.</p>
+                      <p className="text-gray-500 italic mb-4">No skills added yet. Add skills to improve your job matches.</p>
                     )}
                   </div>
+
+                  {/* Suggested Skills based on Headline */}
+                  {formData.headline && (
+                    <div className="bg-sky-50 p-4 rounded-xl border border-sky-100">
+                      <p className="text-sm font-bold text-sky-800 mb-3 flex items-center gap-2">
+                        <span className="text-lg">💡</span> Suggested for you based on "{formData.headline}"
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {(() => {
+                          const headlineLower = formData.headline.toLowerCase();
+                          const suggestions = {
+                            "python": ["Django", "Flask", "FastAPI", "Pandas", "NumPy", "AWS", "PostgreSQL"],
+                            "frontend": ["React", "Vue.js", "TypeScript", "Tailwind CSS", "Redux", "Next.js"],
+                            "react": ["Redux", "Next.js", "TypeScript", "Tailwind CSS", "Jest"],
+                            "full stack": ["Node.js", "React", "MongoDB", "Express", "Docker", "AWS"],
+                            "backend": ["Node.js", "Python", "Java", "Go", "SQL", "Redis"],
+                            "java": ["Spring Boot", "Hibernate", "Microservices", "Kafka", "AWS"],
+                            "data": ["Python", "SQL", "Machine Learning", "Tableau", "Power BI"],
+                            "devops": ["Docker", "Kubernetes", "Jenkins", "AWS", "Terraform", "CI/CD"],
+                            "designer": ["Figma", "Adobe XD", "Photoshop", "UI/UX", "Prototyping"]
+                          };
+
+                          let matchedSuggestions = new Set();
+                          Object.keys(suggestions).forEach(key => {
+                            if (headlineLower.includes(key)) {
+                              suggestions[key].forEach(s => matchedSuggestions.add(s));
+                            }
+                          });
+                          // Add generic fallback if empty but headline exists
+                          if (matchedSuggestions.size === 0 && headlineLower.length > 3) {
+                            ["Communication", "Teamwork", "Problem Solving", "Git", "Agile"].forEach(s => matchedSuggestions.add(s));
+                          }
+
+                          const finalSuggestions = Array.from(matchedSuggestions).filter(s => !skillsList.some(existing => existing.toLowerCase() === s.toLowerCase()));
+
+                          if (finalSuggestions.length === 0) return <p className="text-xs text-sky-600 italic">No specific suggestions found. Try adding generic skills!</p>;
+
+                          return finalSuggestions.slice(0, 8).map(skill => (
+                            <button
+                              key={skill}
+                              onClick={async () => {
+                                const newSkills = [...skillsList, skill];
+                                try {
+                                  await apiClient.put("/accounts/job-seekers/update_profile/", { skills: newSkills.join(",") });
+                                  setSkillsList(newSkills); // Optimistic update
+                                } catch (e) {
+                                  console.error("Failed to add skill", e);
+                                }
+                              }}
+                              className="px-3 py-1 bg-white border border-sky-200 text-sky-700 text-xs font-semibold rounded-full hover:bg-sky-100 hover:border-sky-300 transition flex items-center gap-1"
+                            >
+                              <Plus size={12} /> {skill}
+                            </button>
+                          ));
+                        })()}
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             )}

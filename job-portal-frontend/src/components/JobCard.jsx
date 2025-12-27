@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { MapPin, Briefcase, ArrowRight } from "lucide-react";
+import { MapPin, Briefcase, ArrowRight, IndianRupee } from "lucide-react";
+import { formatSalary } from "../utils/formatters";
 
 export default function JobCard({ job }) {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ export default function JobCard({ job }) {
 
   return (
     <div
-      className="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg hover:border-blue-300 transition-all duration-300 cursor-pointer group relative overflow-hidden"
+      className="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg hover:border-blue-300 hover:-translate-y-1 transition-all duration-300 cursor-pointer group relative overflow-hidden"
       onClick={() => navigate(`/job/${job.id}`)}
     >
       <div className="flex justify-between items-start gap-3 mb-3">
@@ -55,9 +56,10 @@ export default function JobCard({ job }) {
       <div className="flex justify-between items-center pt-3 border-t border-gray-100">
         <div>
           {job.salary_min && job.salary_max && (
-            <p className="text-gray-900 font-semibold">
-              ₹{job.salary_min} - ₹{job.salary_max} LPA
-            </p>
+            <div className="flex items-center gap-1 text-gray-900 font-semibold">
+              <IndianRupee size={16} />
+              <span>{formatSalary(job.salary_min, job.salary_max)}</span>
+            </div>
           )}
         </div>
         <button className="flex items-center gap-1.5 bg-[#0A66C2] hover:bg-[#004182] text-white px-4 py-2 rounded-md text-sm font-medium transition-colors shadow-sm group-hover:gap-2">

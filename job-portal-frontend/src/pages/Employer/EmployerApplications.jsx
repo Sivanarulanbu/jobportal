@@ -87,11 +87,11 @@ export default function EmployerApplications() {
     if (!status) return "bg-gray-100 text-gray-800 border-gray-200";
     const normalizedStatus = status.toLowerCase();
     const colors = {
-      pending: "bg-amber-50 text-amber-700 border-amber-200 ring-amber-100",
-      reviewed: "bg-blue-50 text-blue-700 border-blue-200 ring-blue-100",
-      shortlisted: "bg-emerald-50 text-emerald-700 border-emerald-200 ring-emerald-100",
-      rejected: "bg-rose-50 text-rose-700 border-rose-200 ring-rose-100",
-      accepted: "bg-purple-50 text-purple-700 border-purple-200 ring-purple-100",
+      pending: "bg-amber-100 text-amber-800 border-amber-200 ring-amber-100",
+      reviewed: "bg-blue-100 text-blue-800 border-blue-200 ring-blue-100",
+      shortlisted: "bg-emerald-100 text-emerald-800 border-emerald-200 ring-emerald-100",
+      rejected: "bg-red-100 text-red-800 border-red-200 ring-red-100",
+      accepted: "bg-purple-100 text-purple-800 border-purple-200 ring-purple-100",
     };
     return colors[normalizedStatus] || "bg-gray-50 text-gray-700 border-gray-200";
   };
@@ -245,52 +245,73 @@ export default function EmployerApplications() {
                     </div>
                   </div>
 
-                  <div className="flex-1 mt-2">
+                  <div className="flex-1 mt-2 w-full">
                     <div className="flex flex-wrap justify-between items-start gap-4">
                       <div>
                         <h1 className="text-3xl font-bold text-gray-900 mb-1">{selectedApp.applicant_name || "Unknown Applicant"}</h1>
                         <p className="text-gray-500 font-medium mb-4 flex items-center gap-2">
                           Applied for <span className="text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded text-sm font-semibold">{selectedApp.job_title}</span>
                         </p>
+
+                        <div className="flex flex-wrap gap-3 mt-2">
+                          <a href={`mailto:${selectedApp.applicant_email}`} className="flex items-center gap-2 px-3 py-1.5 bg-white text-gray-600 rounded-lg text-sm border border-gray-200 hover:border-gray-300 hover:shadow-sm transition font-medium">
+                            <span className="text-lg">✉️</span> {selectedApp.applicant_email}
+                          </a>
+                          {selectedApp.applicant_details?.phone && (
+                            <span className="flex items-center gap-2 px-3 py-1.5 bg-white text-gray-600 rounded-lg text-sm border border-gray-200 font-medium">
+                              <span className="text-lg">📱</span> {selectedApp.applicant_details.phone}
+                            </span>
+                          )}
+                          {selectedApp.applicant_details?.linkedin_url && (
+                            <a href={selectedApp.applicant_details.linkedin_url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-3 py-1.5 bg-[#0A66C2]/5 text-[#0A66C2] rounded-lg text-sm border border-[#0A66C2]/20 hover:bg-[#0A66C2]/10 transition font-medium">
+                              <span className="font-bold">in</span> LinkedIn Profile
+                            </a>
+                          )}
+                        </div>
                       </div>
-                      <div className="flex flex-col items-end">
-                        <span className={`px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest border shadow-sm ${getStatusColor(selectedApp.status)}`}>
-                          {selectedApp.status || "Unknown"}
-                        </span>
-                        <span className="text-xs text-gray-400 mt-1.5 font-medium">
+
+                      {/* Action Buttons in Header */}
+                      <div className="flex flex-col items-end gap-3">
+                        {['pending', 'reviewed'].includes((selectedApp.status || "").toLowerCase()) ? (
+                          <div className="flex gap-2">
+                            <button
+                              onClick={() => updateApplicationStatus(selectedApp.id, "shortlisted")}
+                              className="px-5 py-2 bg-gray-900 text-white font-bold rounded-lg hover:bg-gray-800 transition-all flex items-center gap-2 text-sm shadow-sm"
+                            >
+                              <span>✓</span> Shortlist
+                            </button>
+                            <button
+                              onClick={() => updateApplicationStatus(selectedApp.id, "rejected")}
+                              className="px-5 py-2 bg-white text-rose-600 border border-rose-200 font-bold rounded-lg hover:bg-rose-50 transition-all flex items-center gap-2 text-sm"
+                            >
+                              <span>✗</span> Reject
+                            </button>
+                          </div>
+                        ) : (
+                          <div className="flex gap-2 items-center bg-gray-50 px-4 py-1.5 rounded-lg border border-gray-200">
+                            <span className="text-sm text-gray-500 font-medium">Status:</span>
+                            <span className={`px-2 py-0.5 rounded text-xs font-bold uppercase ${getStatusColor(selectedApp.status)}`}>{selectedApp.status}</span>
+                            <button onClick={() => updateApplicationStatus(selectedApp.id, 'pending')} className="ml-2 text-xs font-semibold text-indigo-600 hover:underline">Change</button>
+                          </div>
+                        )}
+                        <span className="text-xs text-gray-400 font-medium">
                           Applied {selectedApp.applied_at ? new Date(selectedApp.applied_at).toLocaleDateString() : 'N/A'}
                         </span>
                       </div>
-                    </div>
-
-                    <div className="flex flex-wrap gap-3 mt-2">
-                      <a href={`mailto:${selectedApp.applicant_email}`} className="flex items-center gap-2 px-3 py-1.5 bg-white text-gray-600 rounded-lg text-sm border border-gray-200 hover:border-gray-300 hover:shadow-sm transition font-medium">
-                        <span className="text-lg">✉️</span> {selectedApp.applicant_email}
-                      </a>
-                      {selectedApp.applicant_details?.phone && (
-                        <span className="flex items-center gap-2 px-3 py-1.5 bg-white text-gray-600 rounded-lg text-sm border border-gray-200 font-medium">
-                          <span className="text-lg">📱</span> {selectedApp.applicant_details.phone}
-                        </span>
-                      )}
-                      {selectedApp.applicant_details?.linkedin_url && (
-                        <a href={selectedApp.applicant_details.linkedin_url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-3 py-1.5 bg-[#0A66C2]/5 text-[#0A66C2] rounded-lg text-sm border border-[#0A66C2]/20 hover:bg-[#0A66C2]/10 transition font-medium">
-                          <span className="font-bold">in</span> LinkedIn Profile
-                        </a>
-                      )}
                     </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Content Body */}
+            {/* Content Body - Two Column Layout */}
             <div className="p-8 flex-1 space-y-8 overflow-y-auto bg-white/50">
 
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                {/* Left Column (Main Info) */}
-                <div className="lg:col-span-2 space-y-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                {/* Left Column (Bio & Cover Letter) */}
+                <div className="space-y-6">
                   {/* Bio */}
-                  <section className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+                  <section className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden h-fit">
                     <div className="px-6 py-4 border-b border-gray-50 flex items-center gap-2 bg-gray-50/30">
                       <span className="text-xl">📝</span>
                       <h3 className="font-bold text-gray-800">Professional Summary</h3>
@@ -309,7 +330,7 @@ export default function EmployerApplications() {
                   </section>
 
                   {/* Cover Letter */}
-                  <section className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+                  <section className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden h-fit">
                     <div className="px-6 py-4 border-b border-gray-50 flex items-center gap-2 bg-gray-50/30">
                       <span className="text-xl">📨</span>
                       <h3 className="font-bold text-gray-800">Cover Letter</h3>
@@ -328,28 +349,15 @@ export default function EmployerApplications() {
                   </section>
                 </div>
 
-                {/* Right Column (Meta) */}
+                {/* Right Column (Skills & Documents) */}
                 <div className="space-y-6">
-                  {/* Skills */}
-                  <section>
-                    <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-3">Skills & Expertise</h3>
-                    <div className="flex flex-wrap gap-2">
-                      {selectedApp.applicant_details?.skills && selectedApp.applicant_details.skills.length > 0 ? (
-                        selectedApp.applicant_details.skills.map((skill, i) => (
-                          <span key={i} className="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 rounded-lg text-sm font-medium shadow-sm hover:border-gray-300 transition cursor-default">
-                            {skill}
-                          </span>
-                        ))
-                      ) : (
-                        <p className="text-gray-400 text-sm italic">No specific skills listed</p>
-                      )}
-                    </div>
-                  </section>
-
                   {/* Documents */}
-                  <section>
-                    <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-3">Documents</h3>
-                    <div className="space-y-3">
+                  <section className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden h-fit">
+                    <div className="px-6 py-4 border-b border-gray-50 flex items-center gap-2 bg-gray-50/30">
+                      <span className="text-xl">📄</span>
+                      <h3 className="font-bold text-gray-800">Documents</h3>
+                    </div>
+                    <div className="p-6 space-y-3">
                       {selectedApp.resume && (
                         <a href={getAbsoluteUrl(selectedApp.resume)} target="_blank" rel="noopener noreferrer" className="flex items-center p-3 bg-white border border-gray-200 rounded-xl hover:border-indigo-400 hover:shadow-md transition group no-underline">
                           <div className="w-10 h-10 bg-red-50 text-red-500 rounded-lg flex items-center justify-center mr-3 font-bold text-xs border border-red-100">
@@ -382,52 +390,42 @@ export default function EmployerApplications() {
                     </div>
                   </section>
 
+                  {/* Skills */}
+                  <section className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden h-fit">
+                    <div className="px-6 py-4 border-b border-gray-50 flex items-center gap-2 bg-gray-50/30">
+                      <span className="text-xl">⚡</span>
+                      <h3 className="font-bold text-gray-800">Skills & Expertise</h3>
+                    </div>
+                    <div className="p-6">
+                      <div className="flex flex-wrap gap-2">
+                        {selectedApp.applicant_details?.skills && selectedApp.applicant_details.skills.length > 0 ? (
+                          selectedApp.applicant_details.skills.map((skill, i) => (
+                            <span key={i} className="px-3 py-1.5 bg-gray-50 border border-gray-200 text-gray-700 rounded-lg text-sm font-medium shadow-sm hover:border-gray-300 transition cursor-default">
+                              {skill}
+                            </span>
+                          ))
+                        ) : (
+                          <p className="text-gray-400 text-sm italic">No specific skills listed</p>
+                        )}
+                      </div>
+                    </div>
+                  </section>
+
                   {/* Experience Level */}
                   {selectedApp.applicant_details?.experience_level && (
-                    <section>
-                      <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-2">Experience</h3>
-                      <div className="px-4 py-3 bg-white border border-gray-200 rounded-xl flex items-center gap-3 shadow-sm">
-                        <span className="text-2xl">💼</span>
-                        <div>
-                          <p className="text-sm font-bold text-gray-800">{selectedApp.applicant_details.experience_level}</p>
-                          <p className="text-xs text-gray-500">Experience Level</p>
-                        </div>
+                    <section className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden h-fit">
+                      <div className="px-6 py-4 border-b border-gray-50 flex items-center gap-2 bg-gray-50/30">
+                        <span className="text-xl">💼</span>
+                        <h3 className="font-bold text-gray-800">Experience</h3>
+                      </div>
+                      <div className="p-6">
+                        <p className="text-sm font-bold text-gray-800">{selectedApp.applicant_details.experience_level}</p>
+                        <p className="text-xs text-gray-500">Experience Level</p>
                       </div>
                     </section>
                   )}
                 </div>
               </div>
-            </div>
-
-            {/* Sticky Action Footer */}
-            <div className="sticky bottom-0 bg-white border-t border-gray-100 p-6 flex flex-col sm:flex-row justify-end gap-3 shadow-[0_-8px_30px_rgba(0,0,0,0.04)] z-20">
-              <div className="flex-1 hidden sm:flex items-center">
-                <div className="w-2 h-2 rounded-full bg-indigo-500 mr-2 animate-pulse"></div>
-                <p className="text-xs text-gray-500 font-medium">Reviewing candidate application</p>
-              </div>
-              {['pending', 'reviewed'].includes((selectedApp.status || "").toLowerCase()) ? (
-                <>
-                  <button
-                    onClick={() => updateApplicationStatus(selectedApp.id, "shortlisted")}
-                    className="px-6 py-2.5 bg-gray-900 text-white font-bold rounded-lg hover:bg-gray-800 hover:shadow-lg hover:-translate-y-0.5 active:scale-95 transition-all flex items-center gap-2"
-                  >
-                    <span>✓</span> Shortlist
-                  </button>
-                  <button
-                    onClick={() => updateApplicationStatus(selectedApp.id, "rejected")}
-                    className="px-6 py-2.5 bg-white text-rose-600 border border-rose-100 font-bold rounded-lg hover:bg-rose-50 hover:border-rose-200 active:scale-95 transition-all flex items-center gap-2"
-                  >
-                    <span>✗</span> Reject
-                  </button>
-                </>
-              ) : (
-                <div className="flex gap-3 items-center bg-gray-50 px-5 py-2 rounded-lg border border-gray-100">
-                  <span className="text-sm text-gray-500">Status:</span>
-                  <span className={`font-bold uppercase text-sm ${getStatusColor(selectedApp.status).split(' ')[1]}`}>{selectedApp.status}</span>
-                  <div className="h-4 w-px bg-gray-300 mx-1"></div>
-                  <button onClick={() => updateApplicationStatus(selectedApp.id, 'pending')} className="text-xs font-semibold text-indigo-600 hover:text-indigo-800 hover:underline">Change Status</button>
-                </div>
-              )}
             </div>
 
           </div>

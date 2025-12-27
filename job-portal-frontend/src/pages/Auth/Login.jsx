@@ -2,10 +2,13 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { useNavigate, Link } from "react-router-dom";
 import Logo from "../../components/Logo";
+import { Loader2 } from "lucide-react";
+import { useToast } from "../../context/ToastContext";
 
 export default function Login() {
   const { login, user } = useAuth();
   const nav = useNavigate();
+  const { addToast } = useToast();
   const [form, setForm] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -31,6 +34,7 @@ export default function Login() {
       setLoading(true);
       console.log("Starting login...");
       await login({ username: form.username, password: form.password });
+      addToast("Successfully signed in!", "success");
       console.log("Login successful, redirecting...");
 
       // Give it a moment to ensure state is updated
@@ -41,6 +45,7 @@ export default function Login() {
       console.error("Login error:", err);
       const errorMsg = err.response?.data?.message || err.message || "Login failed. Please check your credentials.";
       setError(errorMsg);
+      addToast(errorMsg, "error");
     } finally {
       setLoading(false);
     }
@@ -94,8 +99,9 @@ export default function Login() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold rounded-xl hover:shadow-lg hover:opacity-95 transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed mt-2"
+            className="w-full py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold rounded-xl hover:shadow-lg hover:opacity-95 transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed mt-2 flex justify-center items-center gap-2"
           >
+            {loading && <Loader2 className="animate-spin" size={20} />}
             {loading ? "Signing in..." : "Sign In"}
           </button>
         </form>

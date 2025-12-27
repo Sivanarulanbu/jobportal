@@ -22,43 +22,47 @@ import EmployerJobs from "../pages/Employer/EmployerJobs";
 
 import NotFound from "../pages/NotFound";
 
+import { ToastProvider } from "../context/ToastContext";
+
 export default function AppRouter() {
   return (
-    <AuthProvider>
-      <BrowserRouter>
-        <Routes>
-          {/* Landing & Jobs Pages (with layout) */}
-          <Route element={<MainLayout />}>
-            <Route path="/" element={<LandingPage />} />
-            <Route path="/jobs" element={<JobsListingPage />} />
-            <Route path="/job/:id" element={<JobDetailsPage />} />
-            <Route path="/profile" element={<ProfileDashboard />} />
-            <Route path="/about" element={<About />} />
-          </Route>
+    <ToastProvider>
+      <AuthProvider>
+        <BrowserRouter>
+          <Routes>
+            {/* Landing & Jobs Pages (with layout) */}
+            <Route element={<MainLayout />}>
+              <Route path="/" element={<LandingPage />} />
+              <Route path="/jobs" element={<JobsListingPage />} />
+              <Route path="/job/:id" element={<JobDetailsPage />} />
+              <Route path="/profile" element={<ProfileDashboard />} />
+              <Route path="/about" element={<About />} />
+            </Route>
 
-          {/* Auth Pages (without layout) */}
-          {/* Auth Pages (without layout) */}
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/otp-login" element={<OTPLogin />} />
-          <Route path="/auth" element={<Login />} />
+            {/* Auth Pages (without layout) */}
+            {/* Auth Pages (without layout) */}
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/otp-login" element={<OTPLogin />} />
+            <Route path="/auth" element={<Login />} />
 
-          {/* Dashboards */}
-          <Route element={<MainLayout />}>
-            <Route path="/employer-dashboard" element={<EmployerDashboard />} />
-            <Route path="/job-seeker-dashboard" element={<JobSeekerDashboard />} />
+            {/* Dashboards */}
+            <Route element={<MainLayout />}>
+              <Route path="/employer-dashboard" element={<EmployerDashboard />} />
+              <Route path="/job-seeker-dashboard" element={<JobSeekerDashboard />} />
 
-            {/* Employer Routes */}
-            <Route path="/employer/post-job" element={<JobPostingForm />} />
-            <Route path="/employer/applications" element={<EmployerApplications />} />
-            <Route path="/employer/jobs" element={<EmployerJobs />} />
-          </Route>
+              {/* Employer Routes */}
+              <Route path="/employer/post-job" element={<JobPostingForm />} />
+              <Route path="/employer/applications" element={<EmployerApplications />} />
+              <Route path="/employer/jobs" element={<EmployerJobs />} />
+            </Route>
 
-          {/* 404 */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </AuthProvider>
+            {/* 404 */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
+    </ToastProvider>
   );
 }
 

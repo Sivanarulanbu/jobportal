@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Search, Briefcase, MapPin, Users, ArrowRight, Building2, TrendingUp, Monitor, Palette, BarChart3, Banknote, GraduationCap, Stethoscope } from "lucide-react";
+import { Search, Briefcase, MapPin, Users, ArrowRight, Building2, TrendingUp, Monitor, Palette, BarChart3, Banknote, GraduationCap, Stethoscope, IndianRupee } from "lucide-react";
 import apiClient from "../utils/apiClient";
 import { useAuth } from "../hooks/useAuth";
+import JobCardSkeleton from "../components/JobCardSkeleton";
+import { formatSalary } from "../utils/formatters";
 
 export default function LandingPage() {
   const navigate = useNavigate();
@@ -37,8 +39,8 @@ export default function LandingPage() {
 
   return (
     <div className="bg-white">
-      {/* Hero Section - Minimalist Full Width */}
-      <section className="relative bg-gradient-to-b from-blue-50 to-white py-16 md:py-24">
+      {/* Hero Section - Mesh Gradient */}
+      <section className="relative bg-mesh py-20 md:py-32 overflow-hidden">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Main Heading */}
           <div className="text-center mb-10">
@@ -157,11 +159,7 @@ export default function LandingPage() {
           {loading ? (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
               {[...Array(6)].map((_, i) => (
-                <div key={i} className="bg-white rounded-lg p-6 animate-pulse border border-gray-200">
-                  <div className="h-5 bg-gray-200 rounded w-3/4 mb-4"></div>
-                  <div className="h-4 bg-gray-200 rounded w-1/2 mb-3"></div>
-                  <div className="h-4 bg-gray-200 rounded w-2/3"></div>
-                </div>
+                <JobCardSkeleton key={i} />
               ))}
             </div>
           ) : (
@@ -200,9 +198,10 @@ export default function LandingPage() {
                   </p>
 
                   <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                    <span className="font-semibold text-gray-900">
-                      ₹{job.salary_min} - {job.salary_max} LPA
-                    </span>
+                    <div className="flex items-center gap-1 font-semibold text-gray-900">
+                      <IndianRupee size={16} />
+                      <span>{formatSalary(job.salary_min, job.salary_max)}</span>
+                    </div>
                     <span className="text-[#0A66C2] font-medium text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
                       Apply <ArrowRight size={14} />
                     </span>

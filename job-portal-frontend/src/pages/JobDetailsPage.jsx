@@ -9,20 +9,26 @@ import {
   Heart,
   ArrowLeft,
   AlertCircle,
+  IndianRupee,
+  Loader2,
 } from "lucide-react";
 import apiClient from "../utils/apiClient";
 import { useAuth } from "../hooks/useAuth";
+import { formatSalary } from "../utils/formatters";
+import { useToast } from "../context/ToastContext";
 
 export default function JobDetailsPage() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { addToast } = useToast();
   const [job, setJob] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isSaved, setIsSaved] = useState(false);
   const [isApplied, setIsApplied] = useState(false);
   const [showApplyModal, setShowApplyModal] = useState(false);
   const [coverLetter, setCoverLetter] = useState("");
+  const [applying, setApplying] = useState(false);
 
   useEffect(() => {
     const fetchJob = async () => {
@@ -48,12 +54,16 @@ export default function JobDetailsPage() {
     }
 
     try {
+      setApplying(true);
       await apiClient.post(`/jobs/${id}/apply/`, { cover_letter: coverLetter });
       setIsApplied(true);
-      alert("Application submitted successfully!");
+      addToast("Application submitted successfully!", "success");
       setShowApplyModal(false);
     } catch (error) {
-      alert(error.response?.data?.detail || error.response?.data?.error || error.response?.data?.message || "Error applying for job");
+      const msg = error.response?.data?.detail || error.response?.data?.error || error.response?.data?.message || "Error applying for job";
+      addToast(msg, "error");
+    } finally {
+      setApplying(false);
     }
   };
 
@@ -66,8 +76,10 @@ export default function JobDetailsPage() {
     try {
       const response = await apiClient.post(`/jobs/${id}/save/`, {});
       setIsSaved(response.data.is_saved);
+      addToast(response.data.is_saved ? "Job saved to your profile!" : "Job removed from saved jobs.", "success");
     } catch (error) {
       console.error("Error saving job:", error);
+      addToast("Failed to update saved status.", "error");
     }
   };
 
@@ -150,13 +162,13 @@ export default function JobDetailsPage() {
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <DollarSign className="text-blue-600" size={20} />
+                  <IndianRupee className="text-blue-600" size={20} />
                   <div>
                     <p className="text-xs text-gray-600 uppercase tracking-wide">
                       Salary
                     </p>
                     <p className="font-semibold text-gray-900">
-                      {job.salary_min} - {job.salary_max} LPA
+                      {formatSalary(job.salary_min, job.salary_max)}
                     </p>
                   </div>
                 </div>
@@ -255,9 +267,10 @@ export default function JobDetailsPage() {
             <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 sticky top-6">
               <button
                 onClick={() => setShowApplyModal(true)}
-                className="w-full px-6 py-3 bg-sky-600 hover:bg-sky-700 text-white font-bold rounded-lg transition mb-4"
+                disabled={isApplied}
+                className={`w-full px-6 py-3 font-bold rounded-lg transition mb-4 ${isApplied ? 'bg-gray-100 text-gray-500 cursor-not-allowed' : 'bg-sky-600 hover:bg-sky-700 text-white'}`}
               >
-                Apply Now
+                {isApplied ? "Applied" : "Apply Now"}
               </button>
 
               <div className="space-y-3">
@@ -337,12 +350,15 @@ export default function JobDetailsPage() {
               </div>
               <button
                 onClick={handleApply}
-                className="w-full px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white font-bold rounded-lg transition"
+                disabled={applying}
+                className="w-full px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white font-bold rounded-lg transition flex items-center justify-center gap-2 disabled:bg-teal-400"
               >
-                Confirm Application
+                {applying && <Loader2 size={18} className="animate-spin" />}
+                {applying ? "Submitting..." : "Confirm Application"}
               </button>
               <button
                 onClick={() => setShowApplyModal(false)}
+                disabled={applying}
                 className="w-full px-6 py-3 border-2 border-gray-300 text-gray-900 font-semibold rounded-lg hover:bg-gray-50 transition"
               >
                 Cancel

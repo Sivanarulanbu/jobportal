@@ -8,12 +8,14 @@ import {
   ChevronLeft,
   ChevronRight,
   SlidersHorizontal,
-  X,
   ArrowRight,
   Clock,
   Building2,
+  IndianRupee,
 } from "lucide-react";
 import apiClient from "../utils/apiClient";
+import JobCardSkeleton from "../components/JobCardSkeleton";
+import { formatSalary } from "../utils/formatters";
 
 export default function JobsListingPage() {
   const navigate = useNavigate();
@@ -115,7 +117,7 @@ export default function JobsListingPage() {
         <div className="flex gap-6">
           {/* Filter Sidebar - Desktop */}
           <aside className="hidden lg:block w-72 flex-shrink-0">
-            <div className="bg-white rounded-xl border border-gray-200 shadow-sm sticky top-20">
+            <div className="bg-white rounded-xl border border-gray-200 shadow-sm sticky top-24 h-fit max-h-[calc(100vh-8rem)] overflow-y-auto custom-scrollbar">
               {/* Filter Header */}
               <div className="px-5 py-4 border-b border-gray-100">
                 <div className="flex items-center justify-between">
@@ -335,11 +337,7 @@ export default function JobsListingPage() {
             {loading ? (
               <div className="space-y-4">
                 {[...Array(5)].map((_, i) => (
-                  <div key={i} className="bg-white rounded-xl p-6 animate-pulse border border-gray-200">
-                    <div className="h-5 bg-gray-200 rounded w-1/3 mb-4"></div>
-                    <div className="h-4 bg-gray-200 rounded w-1/2 mb-3"></div>
-                    <div className="h-4 bg-gray-200 rounded w-2/3"></div>
-                  </div>
+                  <JobCardSkeleton key={i} />
                 ))}
               </div>
             ) : paginatedJobs.length > 0 ? (
@@ -389,7 +387,7 @@ export default function JobsListingPage() {
                         <div className="flex items-center gap-1 px-3 py-1.5 bg-green-50 rounded-lg">
                           <IndianRupee size={16} className="text-green-600" />
                           <span className="text-sm font-bold text-green-700">
-                            {job.salary_min} - {job.salary_max} LPA
+                            {formatSalary(job.salary_min, job.salary_max)}
                           </span>
                         </div>
                       </div>
