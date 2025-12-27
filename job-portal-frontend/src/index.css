@@ -143,9 +143,9 @@ footer {
   padding: 0.625rem 1.25rem;
   font-weight: 600;
   font-size: 0.9375rem;
-  border-radius: 6px;
-  transition: all 0.2s ease;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .btn:hover {
@@ -192,17 +192,21 @@ footer {
 /* -------------------------------------------------
    Card Utilities
 ------------------------------------------------- */
+/* -------------------------------------------------
+   Card Utilities
+------------------------------------------------- */
 .card {
   background: white;
-  border-radius: 8px;
+  border-radius: 12px;
   border: 1px solid var(--border);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border-color: #D1D5DB;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  border-color: #93C5FD;
+  transform: translateY(-4px);
 }
 
 .card-interactive {
@@ -210,7 +214,7 @@ footer {
 }
 
 .card-interactive:hover {
-  transform: translateY(-2px);
+  transform: translateY(-4px);
 }
 
 /* -------------------------------------------------
@@ -230,7 +234,7 @@ footer {
 .input:focus {
   outline: none;
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(10, 102, 194, 0.15);
+  box-shadow: 0 0 0 4px rgba(10, 102, 194, 0.1);
 }
 
 .input::placeholder {

@@ -17,7 +17,7 @@ export default function JobCard({ job }) {
 
   return (
     <div
-      className="bg-white border border-gray-200 rounded-lg p-5 hover:shadow-md hover:border-[#0A66C2] transition-all cursor-pointer group"
+      className="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg hover:border-blue-300 transition-all duration-300 cursor-pointer group relative overflow-hidden"
       onClick={() => navigate(`/job/${job.id}`)}
     >
       <div className="flex justify-between items-start gap-3 mb-3">

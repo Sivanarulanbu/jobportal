@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Search, Briefcase, MapPin, Users, ArrowRight, Building2, TrendingUp } from "lucide-react";
+import { Search, Briefcase, MapPin, Users, ArrowRight, Building2, TrendingUp, Monitor, Palette, BarChart3, Banknote, GraduationCap, Stethoscope } from "lucide-react";
 import apiClient from "../utils/apiClient";
 import { useAuth } from "../hooks/useAuth";
 
@@ -170,7 +170,7 @@ export default function LandingPage() {
                 <div
                   key={job.id}
                   onClick={() => navigate(`/job/${job.id}`)}
-                  className="bg-white rounded-lg p-6 border border-gray-200 hover:border-[#0A66C2] hover:shadow-md transition-all cursor-pointer group"
+                  className="bg-white rounded-xl p-6 border border-gray-200 hover:border-blue-300 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer group"
                 >
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex-1 min-w-0">
@@ -225,34 +225,34 @@ export default function LandingPage() {
       </section>
 
       {/* Categories Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">Browse by Category</h2>
-            <p className="text-gray-600">Explore jobs in your preferred domain</p>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-3">Browse by Category</h2>
+            <p className="text-gray-600 text-lg">Explore jobs in your preferred domain</p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
-              { name: "Technology", count: "450+ Jobs", icon: "💻", bgColor: "bg-blue-50", iconBg: "bg-blue-100", textColor: "text-blue-600" },
-              { name: "Design", count: "280+ Jobs", icon: "🎨", bgColor: "bg-purple-50", iconBg: "bg-purple-100", textColor: "text-purple-600" },
-              { name: "Marketing", count: "320+ Jobs", icon: "📊", bgColor: "bg-orange-50", iconBg: "bg-orange-100", textColor: "text-orange-600" },
-              { name: "Sales", count: "380+ Jobs", icon: "💼", bgColor: "bg-green-50", iconBg: "bg-green-100", textColor: "text-green-600" },
-              { name: "Finance", count: "290+ Jobs", icon: "💰", bgColor: "bg-yellow-50", iconBg: "bg-yellow-100", textColor: "text-yellow-600" },
-              { name: "HR", count: "160+ Jobs", icon: "👥", bgColor: "bg-pink-50", iconBg: "bg-pink-100", textColor: "text-pink-600" },
-              { name: "Education", count: "220+ Jobs", icon: "📚", bgColor: "bg-indigo-50", iconBg: "bg-indigo-100", textColor: "text-indigo-600" },
-              { name: "Healthcare", count: "340+ Jobs", icon: "🏥", bgColor: "bg-teal-50", iconBg: "bg-teal-100", textColor: "text-teal-600" },
+              { name: "Technology", count: "450+ Jobs", icon: Monitor, bgColor: "bg-blue-50", iconBg: "bg-blue-100", textColor: "text-blue-600", iconColor: "text-blue-600" },
+              { name: "Design", count: "280+ Jobs", icon: Palette, bgColor: "bg-purple-50", iconBg: "bg-purple-100", textColor: "text-purple-600", iconColor: "text-purple-600" },
+              { name: "Marketing", count: "320+ Jobs", icon: BarChart3, bgColor: "bg-orange-50", iconBg: "bg-orange-100", textColor: "text-orange-600", iconColor: "text-orange-600" },
+              { name: "Sales", count: "380+ Jobs", icon: Briefcase, bgColor: "bg-emerald-50", iconBg: "bg-emerald-100", textColor: "text-emerald-600", iconColor: "text-emerald-600" },
+              { name: "Finance", count: "290+ Jobs", icon: Banknote, bgColor: "bg-yellow-50", iconBg: "bg-yellow-100", textColor: "text-yellow-700", iconColor: "text-yellow-600" },
+              { name: "HR", count: "160+ Jobs", icon: Users, bgColor: "bg-pink-50", iconBg: "bg-pink-100", textColor: "text-pink-600", iconColor: "text-pink-600" },
+              { name: "Education", count: "220+ Jobs", icon: GraduationCap, bgColor: "bg-indigo-50", iconBg: "bg-indigo-100", textColor: "text-indigo-600", iconColor: "text-indigo-600" },
+              { name: "Healthcare", count: "340+ Jobs", icon: Stethoscope, bgColor: "bg-teal-50", iconBg: "bg-teal-100", textColor: "text-teal-600", iconColor: "text-teal-600" },
             ].map((category, index) => (
               <div
                 key={index}
                 onClick={() => navigate(`/jobs?search=${category.name}`)}
-                className={`${category.bgColor} rounded-xl p-6 text-center cursor-pointer border border-transparent hover:border-gray-200 hover:bg-white hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group`}
+                className="bg-white rounded-xl p-6 text-center cursor-pointer border border-gray-100 hover:border-blue-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
               >
-                <div className={`w-14 h-14 ${category.iconBg} rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                  <span className="text-2xl">{category.icon}</span>
+                <div className={`w-16 h-16 ${category.iconBg} rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                  <category.icon className={`w-8 h-8 ${category.iconColor}`} />
                 </div>
-                <h3 className={`font-semibold text-gray-900 group-hover:${category.textColor} transition-colors`}>{category.name}</h3>
-                <p className="text-sm text-gray-500 mt-1">{category.count}</p>
+                <h3 className="font-bold text-gray-900 text-lg group-hover:text-[#0A66C2] transition-colors">{category.name}</h3>
+                <p className="text-gray-500 mt-1 font-medium">{category.count}</p>
               </div>
             ))}
           </div>
