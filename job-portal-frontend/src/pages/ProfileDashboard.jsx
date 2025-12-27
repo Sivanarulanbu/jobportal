@@ -73,7 +73,7 @@ export default function ProfileDashboard() {
         setSavedJobs(savedResponse.data || []);
 
         // Fetch applications
-        const applicationsResponse = await apiClient.get("/jobs/my_applications/");
+        const applicationsResponse = await apiClient.get("/applications/");
         setApplications(applicationsResponse.data || []);
       } catch (error) {
         console.error("Error fetching profile data:", error);
@@ -680,35 +680,95 @@ export default function ProfileDashboard() {
                   Your Applications
                 </h2>
                 {applications.length > 0 ? (
-                  <div className="space-y-4">
-                    {applications.map((app) => (
-                      <div
-                        key={app.id}
-                        className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:shadow-md transition"
-                      >
-                        <div className="flex-1">
-                          <h3 className="font-bold text-gray-900">
-                            {app.job?.title || "Job Title"}
-                          </h3>
-                          <p className="text-gray-600 text-sm">
-                            {app.job?.company_name || "Company"} •{" "}
-                            <span className="capitalize">
-                              {app.status || "pending"}
-                            </span>
-                          </p>
-                        </div>
-                        <span
-                          className={`px-4 py-2 rounded-full font-semibold text-sm ${app.status === "accepted"
-                            ? "bg-green-100 text-green-700"
-                            : app.status === "rejected"
-                              ? "bg-red-100 text-red-700"
-                              : "bg-yellow-100 text-yellow-700"
-                            }`}
+                  <div className="space-y-6">
+                    {applications.map((app) => {
+                      // Determine current stage for timeline
+                      const status = app.status ? app.status.toLowerCase() : "pending";
+                      const stages = [
+                        { id: "applied", label: "Applied", completed: true },
+                        {
+                          id: "reviewed",
+                          label: "Resume Viewed",
+                          completed: ["reviewed", "shortlisted", "accepted", "rejected"].includes(status)
+                        },
+                        {
+                          id: "decision",
+                          label: status === "rejected" ? "Rejected" : (status === "shortlisted" ? "Shortlisted" : (status === "accepted" ? "Accepted" : "Decision")),
+                          completed: ["shortlisted", "accepted", "rejected"].includes(status),
+                          isError: status === "rejected",
+                          isSuccess: ["shortlisted", "accepted"].includes(status)
+                        }
+                      ];
+
+                      return (
+                        <div
+                          key={app.id}
+                          className="border border-gray-200 rounded-xl p-6 hover:shadow-md transition-shadow bg-gray-50/50"
                         >
-                          {app.status || "Pending"}
-                        </span>
-                      </div>
-                    ))}
+                          <div className="flex flex-col md:flex-row justify-between md:items-start gap-4 mb-6">
+                            <div>
+                              <h3 className="font-bold text-xl text-gray-900">
+                                {app.job?.title || "Job Title"}
+                              </h3>
+                              <p className="text-gray-600 font-medium">
+                                {app.job?.company_name || "Company"}
+                              </p>
+                              <p className="text-xs text-gray-500 mt-1">
+                                Applied on {new Date(app.created_at || Date.now()).toLocaleDateString()}
+                              </p>
+                            </div>
+                            <span
+                              className={`px-4 py-2 rounded-full font-bold text-xs uppercase tracking-wider self-start ${status === "accepted"
+                                ? "bg-green-100 text-green-700"
+                                : status === "rejected"
+                                  ? "bg-red-100 text-red-700"
+                                  : status === "shortlisted"
+                                    ? "bg-blue-100 text-blue-700"
+                                    : "bg-yellow-100 text-yellow-700"
+                                }`}
+                            >
+                              {status || "Pending"}
+                            </span>
+                          </div>
+
+                          {/* Timeline */}
+                          <div className="relative flex items-center justify-between w-full max-w-2xl mx-auto">
+                            {/* Line */}
+                            <div className="absolute top-1/2 left-0 w-full h-1 bg-gray-200 -z-10 -translate-y-1/2 rounded-full"></div>
+                            <div
+                              className="absolute top-1/2 left-0 h-1 bg-sky-500 -z-10 -translate-y-1/2 rounded-full transition-all duration-500"
+                              style={{
+                                width: status === "pending" ? "0%" :
+                                  status === "reviewed" ? "50%" : "100%"
+                              }}
+                            ></div>
+
+                            {stages.map((stage, index) => (
+                              <div key={stage.id} className="flex flex-col items-center gap-2 bg-gray-50 px-2 z-10">
+                                <div
+                                  className={`w-8 h-8 rounded-full flex items-center justify-center border-2 transition-colors ${stage.completed
+                                    ? (stage.isError ? "bg-red-500 border-red-500 text-white" : "bg-sky-500 border-sky-500 text-white")
+                                    : "bg-white border-gray-300 text-gray-300"
+                                    }`}
+                                >
+                                  {stage.completed ? (
+                                    stage.isError ? <X size={16} /> : <div className="text-white font-bold text-xs">✓</div>
+                                  ) : (
+                                    <span className="text-xs font-bold">{index + 1}</span>
+                                  )}
+                                </div>
+                                <span className={`text-xs font-semibold ${stage.completed
+                                  ? (stage.isError ? "text-red-600" : (stage.isSuccess ? "text-green-600" : "text-gray-900"))
+                                  : "text-gray-400"
+                                  }`}>
+                                  {stage.label}
+                                </span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
                 ) : (
                   <div className="text-center py-12">
@@ -716,6 +776,12 @@ export default function ProfileDashboard() {
                     <p className="text-gray-600">
                       You haven't applied to any jobs yet
                     </p>
+                    <button
+                      onClick={() => navigate('/jobs')}
+                      className="mt-4 px-6 py-2 bg-sky-600 text-white rounded-lg font-semibold hover:bg-sky-700 transition"
+                    >
+                      Browse Jobs
+                    </button>
                   </div>
                 )}
               </div>
