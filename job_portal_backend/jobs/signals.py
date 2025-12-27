@@ -39,7 +39,7 @@ def send_email_thread(subject, html_message, plain_message, recipient_list):
             with open(logo_path, 'rb') as f:
                 logo_data = f.read()
             logo = MIMEImage(logo_data)
-            logo.add_header('Content-ID', '<logo>')
+            logo.add_header('Content-ID', '<logo_image>')
             logo.add_header('Content-Disposition', 'inline', filename='logo.png')
             msg.attach(logo)
         else:

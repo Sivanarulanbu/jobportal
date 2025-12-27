@@ -44,7 +44,7 @@
         }
 
         .hero {
-            background: linear-gradient(135deg, #8B5CF6 0%, #6D28D9 100%);
+            background: linear-gradient(135deg, #0EA5E9 0%, #2563EB 100%);
             padding: 40px 20px;
             text-align: center;
             color: white;
@@ -55,6 +55,7 @@
             font-size: 24px;
             font-weight: 700;
             letter-spacing: -0.5px;
+            color: white;
         }
 
         .content {
@@ -65,8 +66,8 @@
         }
 
         .status-box {
-            background-color: #F5F3FF;
-            border-left: 4px solid #8B5CF6;
+            background-color: #F0F9FF;
+            border-left: 4px solid #0EA5E9;
             padding: 25px;
             margin: 25px 0;
             border-radius: 6px;
@@ -114,20 +115,21 @@
         }
 
         .btn {
-            background-color: #8B5CF6;
-            color: white;
+            background-color: #0EA5E9;
+            color: white !important;
             padding: 14px 32px;
             text-decoration: none;
             border-radius: 8px;
             font-weight: 600;
             font-size: 16px;
             display: inline-block;
-            box-shadow: 0 4px 6px -1px rgba(139, 92, 246, 0.4);
+            box-shadow: 0 4px 6px -1px rgba(14, 165, 233, 0.4);
             transition: background-color 0.2s;
         }
 
         .btn:hover {
-            background-color: #7C3AED;
+            background-color: #0284C7;
+            color: white !important;
         }
 
         .footer {
@@ -156,7 +158,8 @@
             <div class="content">
                 <p>Hi <strong>{{ applicant_name }}</strong>,</p>
                 <p>We have an update on your application for the position of <strong>{{ job_title }}</strong> at
-                    <strong>{{ company_name }}</strong>.</p>
+                    <strong>{{ company_name }}</strong>.
+                </p>
 
                 <div class="status-box">
                     <p style="margin: 0; color: #6B7280; font-size: 14px;">Current Status</p>
