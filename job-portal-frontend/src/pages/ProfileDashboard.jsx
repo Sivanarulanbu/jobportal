@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
   User,
   Mail,
@@ -19,13 +19,14 @@ import { useToast } from "../context/ToastContext";
 
 export default function ProfileDashboard() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { user, logout } = useAuth();
   const { addToast } = useToast();
   const [profileData, setProfileData] = useState(null);
   const [savedJobs, setSavedJobs] = useState([]);
   const [applications, setApplications] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState("profile");
+  const [activeTab, setActiveTab] = useState(location.state?.activeTab || "profile");
   const [editMode, setEditMode] = useState(false);
   const [showResumeModal, setShowResumeModal] = useState(false);
   const [skillsList, setSkillsList] = useState([]);
@@ -37,6 +38,12 @@ export default function ProfileDashboard() {
     // linkedin_url: "", // Add if needed later
     // portfolio_url: "",
   });
+
+  useEffect(() => {
+    if (location.state?.activeTab) {
+      setActiveTab(location.state.activeTab);
+    }
+  }, [location.state]);
 
   useEffect(() => {
     if (!user) {

@@ -94,32 +94,42 @@ export default function JobSeekerDashboard() {
     {
       icon: "🔍",
       title: "Find Jobs",
-      description: "Browse thousands of job opportunities tailored to your skills"
+      description: "Browse thousands of job opportunities tailored to your skills",
+      path: "/jobs"
     },
     {
       icon: "⚡",
       title: "Quick Apply",
-      description: "Apply to jobs in seconds with just a cover letter"
+      description: "Apply to jobs in seconds with just a cover letter",
+      path: "/jobs"
     },
     {
       icon: "📊",
       title: "Track Applications",
-      description: "Monitor the status of all your job applications in real-time"
+      description: "Monitor the status of all your job applications in real-time",
+      path: "/profile",
+      state: { activeTab: "applications" }
     },
     {
       icon: "❤️",
       title: "Save Jobs",
-      description: "Bookmark your favorite positions and revisit them anytime"
+      description: "Bookmark your favorite positions and revisit them anytime",
+      path: "/profile",
+      state: { activeTab: "saved" }
     },
     {
       icon: "💬",
       title: "Get Responses",
-      description: "Receive feedback and interview invitations from employers"
+      description: "Receive feedback and interview invitations from employers",
+      path: "/profile",
+      state: { activeTab: "applications" }
     },
     {
       icon: "📈",
       title: "Career Growth",
-      description: "Build your profile and advance your career journey"
+      description: "Build your profile and advance your career journey",
+      path: "/profile",
+      state: { activeTab: "profile" }
     }
   ];
 
@@ -132,7 +142,7 @@ export default function JobSeekerDashboard() {
         <p style={descriptionStyle}>
           Your path to the perfect job opportunity starts here
         </p>
-        
+
         <div style={buttonGroupStyle}>
           <button
             onClick={() => navigate("/jobs")}
@@ -143,7 +153,7 @@ export default function JobSeekerDashboard() {
             🔍 Find Jobs
           </button>
           <button
-            onClick={() => navigate("/saved-jobs")}
+            onClick={() => navigate("/profile", { state: { activeTab: "saved" } })}
             style={secondaryButtonStyle}
             onMouseEnter={(e) => (e.target.style.transform = "translateY(-2px)", e.target.style.boxShadow = "0 6px 25px rgba(6, 182, 212, 0.4)")}
             onMouseLeave={(e) => (e.target.style.transform = "translateY(0)", e.target.style.boxShadow = "0 4px 15px rgba(0, 0, 0, 0.1)")}
@@ -155,9 +165,10 @@ export default function JobSeekerDashboard() {
 
       <div style={gridStyle}>
         {features.map((feature, index) => (
-          <div 
-            key={index} 
-            style={cardStyle}
+          <div
+            key={index}
+            style={{ ...cardStyle, cursor: "pointer" }}
+            onClick={() => navigate(feature.path, { state: feature.state })}
             onMouseEnter={(e) => {
               e.currentTarget.style.boxShadow = "0 8px 30px rgba(79, 70, 229, 0.2)";
               e.currentTarget.style.transform = "translateY(-5px)";
