@@ -3,106 +3,179 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Submitted - DreamRoute</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
+            margin: 0;
+            padding: 0;
+            background-color: #F3F4F6;
+            font-family: 'Inter', Helvetica, Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
         }
 
-        .container {
-            max-width: 600px;
+        .wrapper {
+            width: 100%;
+            table-layout: fixed;
+            background-color: #F3F4F6;
+            padding-bottom: 40px;
+        }
+
+        .main {
+            background-color: #ffffff;
             margin: 0 auto;
-            padding: 20px;
+            width: 100%;
+            max-width: 600px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-top: 40px;
         }
 
         .header {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-            padding: 30px;
             text-align: center;
-            border-radius: 5px 5px 0 0;
+            padding: 30px 20px;
+            border-bottom: 1px solid #E5E7EB;
+        }
+
+        .logo {
+            width: 150px;
+            height: auto;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #F472B6 0%, #E11D48 100%);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
         }
 
         .content {
-            background: #f9f9f9;
-            padding: 30px;
-            border: 1px solid #ddd;
+            padding: 40px 30px;
+            color: #374151;
+            font-size: 16px;
+            line-height: 1.6;
         }
 
-        .job-details {
-            background: white;
-            padding: 20px;
-            margin: 20px 0;
-            border-left: 4px solid #f5576c;
+        .job-card {
+            background-color: #FFF1F2;
+            border-left: 4px solid #E11D48;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 6px;
         }
 
-        .button {
+        .job-card h3 {
+            margin: 0 0 10px 0;
+            color: #9F1239;
+            font-size: 18px;
+        }
+
+        .job-card p {
+            margin: 5px 0;
+            color: #881337;
+            font-size: 14px;
+        }
+
+        .status-pill {
+            background-color: #FEF3C7;
+            color: #92400E;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
             display: inline-block;
-            background: #667eea;
+        }
+
+        .btn-container {
+            text-align: center;
+            margin: 35px 0;
+        }
+
+        .btn {
+            background-color: #E11D48;
             color: white;
-            padding: 12px 30px;
+            padding: 14px 32px;
             text-decoration: none;
-            border-radius: 5px;
-            margin: 20px 0;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            display: inline-block;
+            box-shadow: 0 4px 6px -1px rgba(225, 29, 72, 0.4);
+            transition: background-color 0.2s;
+        }
+
+        .btn:hover {
+            background-color: #BE123C;
         }
 
         .footer {
             text-align: center;
-            padding: 20px;
-            color: #666;
-            font-size: 12px;
+            padding: 30px 20px;
+            color: #9CA3AF;
+            font-size: 13px;
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <div class="header">
-            <center>
-                <img src="cid:logo" alt="DreamRoute Logo" width="60" height="60"
-                    style="margin-bottom: 20px; display: block;">
-            </center>
-            <h1>✅ Application Submitted Successfully!</h1>
-        </div>
-
-        <div class="content">
-            <p>Hi {{ applicant_name }},</p>
-
-            <p>Congratulations! Your application has been successfully submitted for the following position:</p>
-
-            <div class="job-details">
-                <h3 style="color: #f5576c; margin-top: 0;">📝 Position Details:</h3>
-                <p><strong>Job Title:</strong> {{ job_title }}</p>
-                <p><strong>Company:</strong> {{ company_name }}</p>
-                <p><strong>Status:</strong> <span
-                        style="background: #fff3cd; padding: 5px 10px; border-radius: 3px; color: #856404;">Under
-                        Review</span></p>
+    <div class="wrapper">
+        <div class="main">
+            <!-- Header with Logo -->
+            <div class="header">
+                <img src="cid:logo_image" alt="DreamRoute Logo" class="logo">
             </div>
 
-            <p>We've sent your resume and profile to the employer. They will review your application and get back to you
-                soon. Keep an eye on your email and inbox for updates!</p>
+            <!-- Hero Section -->
+            <div class="hero">
+                <h1>✅ Application Submitted!</h1>
+            </div>
 
-            <p><strong>What to expect next:</strong></p>
-            <ul>
-                <li>Application under review by the employer</li>
-                <li>You'll receive email updates on your application status</li>
-                <li>If shortlisted, the employer may contact you for an interview</li>
-            </ul>
+            <!-- Content -->
+            <div class="content">
+                <p>Hi <strong>{{ applicant_name }}</strong>,</p>
+                <p>Congratulations! Your application has been successfully submitted. We've sent your profile directly
+                    to the employer.</p>
 
-            <center>
-                <a href="{{ portal_url }}" class="button">View Your Applications →</a>
-            </center>
+                <div class="job-card">
+                    <h3>{{ job_title }}</h3>
+                    <p><strong>Company:</strong> {{ company_name }}</p>
+                    <p style="margin-top: 15px;"><strong>Status:</strong> <span class="status-pill">Pending
+                            Review</span></p>
+                </div>
 
-            <p>In the meantime, continue exploring other opportunities on DreamRoute to maximize your chances of landing
-                your dream job!</p>
+                <p><strong>What happens next?</strong></p>
+                <ul style="padding-left: 20px; color: #4B5563;">
+                    <li>The employer reviews your application.</li>
+                    <li>You'll receive email updates on any status changes.</li>
+                    <li>If shortlisted, they may contact you for an interview.</li>
+                </ul>
 
-            <p>Best of luck,<br><strong>The DreamRoute Team</strong></p>
+                <div class="btn-container">
+                    <a href="{{ portal_url }}" class="btn">View Application</a>
+                </div>
+
+                <p>In the meantime, feel free to apply to other matching roles to increase your chances.</p>
+
+                <p
+                    style="margin-top: 40px; border-top: 1px solid #E5E7EB; padding-top: 20px; font-size: 14px; color: #6B7280;">
+                    Best of luck,<br>
+                    <strong>The DreamRoute Team</strong>
+                </p>
+            </div>
         </div>
 
         <div class="footer">
             <p>&copy; 2025 DreamRoute. All rights reserved.</p>
-            <p>This is an automated email. Please do not reply to this email.</p>
+            <p>This is an automated notification. Please do not reply directly to this email.</p>
         </div>
     </div>
 </body>

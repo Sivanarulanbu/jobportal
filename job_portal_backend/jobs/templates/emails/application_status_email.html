@@ -1,78 +1,208 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Status Update - DreamRoute</title>
     <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; text-align: center; border-radius: 5px 5px 0 0; }
-        .content { background: #f9f9f9; padding: 30px; border: 1px solid #ddd; }
-        .status-box { background: white; padding: 20px; margin: 20px 0; border-left: 4px solid #667eea; text-align: center; }
-        .status-badge { display: inline-block; padding: 10px 20px; border-radius: 5px; font-weight: bold; font-size: 18px; margin: 10px 0; }
-        .pending { background: #fff3cd; color: #856404; }
-        .reviewed { background: #d1ecf1; color: #0c5460; }
-        .shortlisted { background: #d4edda; color: #155724; }
-        .accepted { background: #d4edda; color: #155724; }
-        .rejected { background: #f8d7da; color: #721c24; }
-        .job-details { background: white; padding: 20px; margin: 20px 0; border-left: 4px solid #667eea; }
-        .button { display: inline-block; background: #667eea; color: white; padding: 12px 30px; text-decoration: none; border-radius: 5px; margin: 20px 0; }
-        .footer { text-align: center; padding: 20px; color: #666; font-size: 12px; }
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #F3F4F6;
+            font-family: 'Inter', Helvetica, Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .wrapper {
+            width: 100%;
+            table-layout: fixed;
+            background-color: #F3F4F6;
+            padding-bottom: 40px;
+        }
+
+        .main {
+            background-color: #ffffff;
+            margin: 0 auto;
+            width: 100%;
+            max-width: 600px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-top: 40px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 30px 20px;
+            border-bottom: 1px solid #E5E7EB;
+        }
+
+        .logo {
+            width: 150px;
+            height: auto;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #8B5CF6 0%, #6D28D9 100%);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .content {
+            padding: 40px 30px;
+            color: #374151;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .status-box {
+            background-color: #F5F3FF;
+            border-left: 4px solid #8B5CF6;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            margin-top: 10px;
+        }
+
+        .status-badge.pending {
+            background: #FEF3C7;
+            color: #92400E;
+        }
+
+        .status-badge.reviewed {
+            background: #DBEAFE;
+            color: #1E40AF;
+        }
+
+        .status-badge.shortlisted {
+            background: #D1FAE5;
+            color: #065F46;
+        }
+
+        .status-badge.accepted {
+            background: #D1FAE5;
+            color: #065F46;
+        }
+
+        .status-badge.rejected {
+            background: #FEE2E2;
+            color: #991B1B;
+        }
+
+        .btn-container {
+            text-align: center;
+            margin: 35px 0;
+        }
+
+        .btn {
+            background-color: #8B5CF6;
+            color: white;
+            padding: 14px 32px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            display: inline-block;
+            box-shadow: 0 4px 6px -1px rgba(139, 92, 246, 0.4);
+            transition: background-color 0.2s;
+        }
+
+        .btn:hover {
+            background-color: #7C3AED;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: #9CA3AF;
+            font-size: 13px;
+        }
     </style>
 </head>
+
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>📊 Application Status Update</h1>
-        </div>
-        
-        <div class="content">
-            <p>Hi {{ applicant_name }},</p>
-            
-            <p>We have an update on your application for the following position:</p>
-            
-            <div class="job-details">
-                <h3 style="color: #667eea; margin-top: 0;">📋 Position:</h3>
-                <p><strong>Job Title:</strong> {{ job_title }}</p>
-                <p><strong>Company:</strong> {{ company_name }}</p>
+    <div class="wrapper">
+        <div class="main">
+            <!-- Header with Logo -->
+            <div class="header">
+                <img src="cid:logo_image" alt="DreamRoute Logo" class="logo">
             </div>
-            
-            <div class="status-box">
-                <p style="margin: 0; color: #666;">Your Application Status:</p>
-                <div class="status-badge {{ status|lower }}">{{ status }}</div>
+
+            <!-- Hero Section -->
+            <div class="hero">
+                <h1>📊 Application Status Update</h1>
             </div>
-            
-            {% if status == 'shortlisted' %}
-            <p>🎉 Congratulations! Your application has been shortlisted. The employer will contact you soon with the next steps, which may include interviews or assessments.</p>
-            {% elif status == 'accepted' %}
-            <p>🎉 Excellent news! Your application has been accepted. Please check your email for further instructions from the employer.</p>
-            {% elif status == 'rejected' %}
-            <p>Thank you for your interest in this position. While we were impressed with your profile, the employer has decided to move forward with other candidates. Don't get discouraged—there are many more opportunities on DreamRoute!</p>
-            {% elif status == 'reviewed' %}
-            <p>Your application has been reviewed by the employer. We'll keep you updated on the next steps.</p>
-            {% else %}
-            <p>{{ status_message }}</p>
-            {% endif %}
-            
-            <center>
-                <a href="{{ portal_url }}" class="button">Check Your Status →</a>
-            </center>
-            
-            {% if status == 'rejected' %}
-            <p><strong>Keep exploring:</strong> There are many more exciting opportunities available on DreamRoute. Don't let this stop you from pursuing your dream job!</p>
-            <center>
-                <a href="{{ portal_url }}/jobs" class="button">Browse More Jobs →</a>
-            </center>
-            {% endif %}
-            
-            <p>If you have any questions, feel free to reach out to our support team.</p>
-            
-            <p>Best regards,<br><strong>The DreamRoute Team</strong></p>
+
+            <!-- Content -->
+            <div class="content">
+                <p>Hi <strong>{{ applicant_name }}</strong>,</p>
+                <p>We have an update on your application for the position of <strong>{{ job_title }}</strong> at
+                    <strong>{{ company_name }}</strong>.</p>
+
+                <div class="status-box">
+                    <p style="margin: 0; color: #6B7280; font-size: 14px;">Current Status</p>
+                    <div class="status-badge {{ status|lower }}">{{ status }}</div>
+                </div>
+
+                {% if status == 'shortlisted' %}
+                <p>🎉 <strong>Congratulations!</strong> Your application has been shortlisted. The employer will contact
+                    you soon with the next steps.</p>
+                {% elif status == 'accepted' %}
+                <p>🎉 <strong>Excellent news!</strong> Your application has been accepted. Please check your email for
+                    further instructions from the employer.</p>
+                {% elif status == 'rejected' %}
+                <p>Thank you for your interest. Unfortunately, the employer has decided to move forward with other
+                    candidates at this time.</p>
+                {% elif status == 'reviewed' %}
+                <p>Your application has been reviewed by the employer. We'll keep you updated on any further changes.
+                </p>
+                {% else %}
+                <p>{{ status_message }}</p>
+                {% endif %}
+
+                <div class="btn-container">
+                    <a href="{{ portal_url }}" class="btn">Check Your Application</a>
+                </div>
+
+                {% if status == 'rejected' %}
+                <p style="margin-top: 30px; font-size: 14px; color: #6B7280;">don't give up! New opportunities are
+                    posted every day.</p>
+                <p style="text-align: center;"><a href="{{ portal_url }}/jobs"
+                        style="color: #8B5CF6; font-weight: 600; text-decoration: none;">Browse More Jobs →</a></p>
+                {% endif %}
+
+                <p
+                    style="margin-top: 40px; border-top: 1px solid #E5E7EB; padding-top: 20px; font-size: 14px; color: #6B7280;">
+                    Best Regards,<br>
+                    <strong>The DreamRoute Team</strong>
+                </p>
+            </div>
         </div>
-        
+
         <div class="footer">
             <p>&copy; 2025 DreamRoute. All rights reserved.</p>
-            <p>This is an automated email. Please do not reply to this email.</p>
+            <p>This is an automated notification. Please do not reply directly to this email.</p>
         </div>
     </div>
 </body>
+
 </html>
