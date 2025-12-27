@@ -2,79 +2,157 @@
 <html>
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Complete - DreamRoute</title>
     <style>
         body {
-            font-family: 'Helvetica', 'Arial', sans-serif;
-            line-height: 1.6;
-            color: #333;
+            margin: 0;
+            padding: 0;
+            background-color: #F3F4F6;
+            font-family: 'Inter', Helvetica, Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
         }
 
-        .container {
-            max-width: 600px;
+        .wrapper {
+            width: 100%;
+            table-layout: fixed;
+            background-color: #F3F4F6;
+            padding-bottom: 40px;
+        }
+
+        .main {
+            background-color: #ffffff;
             margin: 0 auto;
-            padding: 20px;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            background-color: #f9fafb;
+            width: 100%;
+            max-width: 600px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-top: 40px;
         }
 
         .header {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            color: white;
-            padding: 20px;
             text-align: center;
-            border-radius: 8px 8px 0 0;
+            padding: 30px 20px;
+            border-bottom: 1px solid #E5E7EB;
+        }
+
+        .logo {
+            width: 150px;
+            height: auto;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
         }
 
         .content {
-            padding: 30px 20px;
-            background-color: white;
+            padding: 40px 30px;
+            color: #374151;
+            font-size: 16px;
+            line-height: 1.6;
         }
 
-        .button {
-            display: inline-block;
-            padding: 12px 24px;
-            background-color: #10b981;
+        .highlight-box {
+            background-color: #ECFDF5;
+            border-left: 4px solid #10B981;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 4px;
+        }
+
+        .btn-container {
+            text-align: center;
+            margin: 35px 0;
+        }
+
+        .btn {
+            background-color: #10B981;
             color: white;
+            padding: 14px 32px;
             text-decoration: none;
-            border-radius: 6px;
-            font-weight: bold;
-            margin-top: 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            display: inline-block;
+            box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.4);
+            transition: background-color 0.2s;
+        }
+
+        .btn:hover {
+            background-color: #059669;
         }
 
         .footer {
             text-align: center;
-            font-size: 12px;
-            color: #666;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid #e0e0e0;
+            padding: 30px 20px;
+            color: #9CA3AF;
+            font-size: 13px;
+        }
+
+        .footer a {
+            color: #6B7280;
+            text-decoration: underline;
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>Profile 100% Complete! 🎉</h1>
+    <div class="wrapper">
+        <div class="main">
+            <!-- Header with Logo -->
+            <div class="header">
+                <img src="cid:logo_image" alt="DreamRoute Logo" class="logo">
+            </div>
+
+            <!-- Hero Section -->
+            <div class="hero">
+                <h1>Profile 100% Complete! 🎉</h1>
+            </div>
+
+            <!-- Content -->
+            <div class="content">
+                <p>Hi <strong>{{ user_name }}</strong>,</p>
+                <p>Congratulations! Your profile on DreamRoute is now fully complete. You've just unlocked the full
+                    potential of your job search.</p>
+
+                <div class="highlight-box">
+                    <p style="margin: 0; font-weight: 600; color: #065F46;">Why this matters:</p>
+                    <ul style="margin: 10px 0 0 0; padding-left: 20px; color: #065F46;">
+                        <li>Your profile is highlighted to recruiters.</li>
+                        <li>You qualify for "Instant Match" recommendations.</li>
+                        <li>Employers are 5x more likely to contact you.</li>
+                    </ul>
+                </div>
+
+                <p>Now is the perfect time to start applying to your dream roles.</p>
+
+                <div class="btn-container">
+                    <a href="{{ jobs_url }}" class="btn">Find My Dream Job</a>
+                </div>
+
+                <p
+                    style="margin-top: 40px; border-top: 1px solid #E5E7EB; padding-top: 20px; font-size: 14px; color: #6B7280;">
+                    Best Regards,<br>
+                    <strong>The DreamRoute Team</strong>
+                </p>
+            </div>
         </div>
-        <div class="content">
-            <p>Hi {{ user_name }},</p>
-            <p>Congratulations! Your profile on <strong>DreamRoute</strong> is now fully complete.</p>
-            <p><strong>Why this matters:</strong></p>
-            <ul>
-                <li>Your profile is now highlighted to top recruiters.</li>
-                <li>You are eligible for "Instant Match" job recommendations.</li>
-                <li>Employers are 5x more likely to contact candidates with complete profiles.</li>
-            </ul>
-            <p>Now is the perfect time to start applying!</p>
-            <p style="text-align: center;">
-                <a href="{{ jobs_url }}" class="button">Find My Dream Job</a>
-            </p>
-            <p>Good luck,<br>The DreamRoute Team</p>
-        </div>
+
         <div class="footer">
             <p>&copy; 2025 DreamRoute. All rights reserved.</p>
+            <p>You received this email because you are a registered member of DreamRoute.</p>
         </div>
     </div>
 </body>

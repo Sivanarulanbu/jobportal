@@ -2,86 +2,187 @@
 <html>
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to DreamRoute</title>
     <style>
         body {
-            font-family: 'Helvetica', 'Arial', sans-serif;
-            line-height: 1.6;
-            color: #333;
+            margin: 0;
+            padding: 0;
+            background-color: #F3F4F6;
+            font-family: 'Inter', Helvetica, Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
         }
 
-        .container {
-            max-width: 600px;
+        .wrapper {
+            width: 100%;
+            table-layout: fixed;
+            background-color: #F3F4F6;
+            padding-bottom: 40px;
+        }
+
+        .main {
+            background-color: #ffffff;
             margin: 0 auto;
-            padding: 20px;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            background-color: #f9fafb;
+            width: 100%;
+            max-width: 600px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-top: 40px;
         }
 
         .header {
-            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-            color: white;
-            padding: 20px;
             text-align: center;
-            border-radius: 8px 8px 0 0;
+            padding: 30px 20px;
+            border-bottom: 1px solid #E5E7EB;
+        }
+
+        .logo {
+            width: 150px;
+            height: auto;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
         }
 
         .content {
-            padding: 30px 20px;
-            background-color: white;
+            padding: 40px 30px;
+            color: #374151;
+            font-size: 16px;
+            line-height: 1.6;
         }
 
-        .button {
-            display: inline-block;
-            padding: 12px 24px;
-            background-color: #4f46e5;
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
+        .step-list {
+            margin: 30px 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: start;
+            margin-bottom: 20px;
+        }
+
+        .step-icon {
+            background-color: #EEF2FF;
+            color: #4F46E5;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-weight: bold;
-            margin-top: 20px;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .step-text strong {
+            color: #0F172A;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .btn-container {
+            text-align: center;
+            margin: 35px 0;
+        }
+
+        .btn {
+            background-color: #4F46E5;
+            color: white;
+            padding: 14px 32px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            display: inline-block;
+            box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.4);
+            transition: background-color 0.2s;
+        }
+
+        .btn:hover {
+            background-color: #4338CA;
         }
 
         .footer {
             text-align: center;
-            font-size: 12px;
-            color: #666;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid #e0e0e0;
-        }
-
-        ul {
-            padding-left: 20px;
-        }
-
-        li {
-            margin-bottom: 10px;
+            padding: 30px 20px;
+            color: #9CA3AF;
+            font-size: 13px;
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>Welcome to DreamRoute! 🚀</h1>
+    <div class="wrapper">
+        <div class="main">
+            <!-- Header with Logo -->
+            <div class="header">
+                <img src="cid:logo_image" alt="DreamRoute Logo" class="logo">
+            </div>
+
+            <!-- Hero Section -->
+            <div class="hero">
+                <h1>Welcome to DreamRoute! 🚀</h1>
+            </div>
+
+            <!-- Content -->
+            <div class="content">
+                <p>Hi <strong>{{ user_name }}</strong>,</p>
+                <p>We're thrilled to have you join our community! Your next career Move starts right here.</p>
+
+                <p>To make the most of your search, we recommend these quick wins:</p>
+
+                <ul class="step-list">
+                    <li class="step-item">
+                        <div class="step-icon">1</div>
+                        <div class="step-text">
+                            <strong>Complete Your Profile</strong>
+                            A complete profile gets 3x more views from recruiters.
+                        </div>
+                    </li>
+                    <li class="step-item">
+                        <div class="step-icon">2</div>
+                        <div class="step-text">
+                            <strong>Upload Your Resume</strong>
+                            Attach your latest CV for one-click applications.
+                        </div>
+                    </li>
+                    <li class="step-item">
+                        <div class="step-icon">3</div>
+                        <div class="step-text">
+                            <strong>Set Job Alerts (Coming Soon)</strong>
+                            Be the first to know when perfect roles open up.
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="btn-container">
+                    <a href="{{ profile_url }}" class="btn">Complete My Profile</a>
+                </div>
+
+                <p
+                    style="margin-top: 40px; border-top: 1px solid #E5E7EB; padding-top: 20px; font-size: 14px; color: #6B7280;">
+                    Best Regards,<br>
+                    <strong>The DreamRoute Team</strong>
+                </p>
+            </div>
         </div>
-        <div class="content">
-            <p>Hi {{ user_name }},</p>
-            <p>Welcome to <strong>DreamRoute</strong>! We're thrilled to have you join our community of professionals
-                and opportunities.</p>
-            <p>To get the most out of your job search, here are your next steps:</p>
-            <ul>
-                <li><strong>Complete Your Profile:</strong> A complete profile gets 3x more views from recruiters.</li>
-                <li><strong>Upload Your Resume:</strong> Ensure your latest CV is attached for easy applications.</li>
-                <li><strong>Browse Jobs:</strong> Explore thousands of job listings tailored to your skills.</li>
-            </ul>
-            <p style="text-align: center;">
-                <a href="{{ profile_url }}" class="button">Complete My Profile</a>
-            </p>
-            <p>If you have any questions, feel free to reply to this email.</p>
-            <p>Best regards,<br>The DreamRoute Team</p>
-        </div>
+
         <div class="footer">
             <p>&copy; 2025 DreamRoute. All rights reserved.</p>
         </div>
