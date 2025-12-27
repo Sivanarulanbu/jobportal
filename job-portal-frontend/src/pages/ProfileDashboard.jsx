@@ -70,11 +70,13 @@ export default function ProfileDashboard() {
 
         // Fetch saved jobs
         const savedResponse = await apiClient.get("/saved-jobs/");
-        setSavedJobs(savedResponse.data || []);
+        const savedData = savedResponse.data.results || savedResponse.data || [];
+        setSavedJobs(Array.isArray(savedData) ? savedData : []);
 
         // Fetch applications
         const applicationsResponse = await apiClient.get("/applications/");
-        setApplications(applicationsResponse.data || []);
+        const appsData = applicationsResponse.data.results || applicationsResponse.data || [];
+        setApplications(Array.isArray(appsData) ? appsData : []);
       } catch (error) {
         console.error("Error fetching profile data:", error);
       } finally {
