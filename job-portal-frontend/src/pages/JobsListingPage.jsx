@@ -11,7 +11,6 @@ import {
   ArrowRight,
   Clock,
   Building2,
-  IndianRupee,
 } from "lucide-react";
 import apiClient from "../utils/apiClient";
 import JobCardSkeleton from "../components/JobCardSkeleton";
