@@ -26,7 +26,7 @@ export default function EmployerJobs() {
     setLoading(true);
     setError("");
     try {
-      const response = await axiosInstance.get("/api/jobs/my_jobs/");
+      const response = await axiosInstance.get("/jobs/my_jobs/");
       setJobs(response.data);
     } catch (err) {
       setError("Failed to fetch your jobs");
@@ -42,7 +42,7 @@ export default function EmployerJobs() {
 
     setDeleteLoading(prev => ({ ...prev, [jobId]: true }));
     try {
-      await axiosInstance.delete(`/api/jobs/${jobId}/`);
+      await axiosInstance.delete(`/jobs/${jobId}/`);
       setJobs(prev => prev.filter(job => job.id !== jobId));
     } catch (err) {
       setError("Failed to delete job posting");
@@ -53,7 +53,7 @@ export default function EmployerJobs() {
 
   const toggleJobActive = async (jobId, currentStatus) => {
     try {
-      const response = await axiosInstance.patch(`/api/jobs/${jobId}/`, {
+      const response = await axiosInstance.patch(`/jobs/${jobId}/`, {
         is_active: !currentStatus
       });
       setJobs(prev => prev.map(job => job.id === jobId ? response.data : job));

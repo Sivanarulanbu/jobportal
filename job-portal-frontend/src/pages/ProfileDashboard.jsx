@@ -26,6 +26,7 @@ export default function ProfileDashboard() {
   const [activeTab, setActiveTab] = useState("profile");
   const [editMode, setEditMode] = useState(false);
   const [showResumeModal, setShowResumeModal] = useState(false);
+  const [skillsList, setSkillsList] = useState([]);
   const [formData, setFormData] = useState({
     phone: "",
     location: "",
@@ -55,9 +56,9 @@ export default function ProfileDashboard() {
             headline: profileResponse.data.profile.headline || "",
             bio: profileResponse.data.profile.bio || "",
           });
+          setSkillsList(profileResponse.data.profile.skills_list || []);
         }
 
-        // Fetch saved jobs
         // Fetch saved jobs
         const savedResponse = await apiClient.get("/saved-jobs/");
         setSavedJobs(savedResponse.data || []);
@@ -137,6 +138,55 @@ export default function ProfileDashboard() {
     }
   };
 
+  const handleAddSkill = async () => {
+    const skill = prompt("Enter a skill to add:");
+    if (!skill || !skill.trim()) return;
+
+    const normalizedSkill = skill.trim();
+    if (skillsList.some(s => s.toLowerCase() === normalizedSkill.toLowerCase())) {
+      alert("Skill already exists!");
+      return;
+    }
+
+    const newSkills = [...skillsList, normalizedSkill];
+    const skillsString = newSkills.join(",");
+
+    try {
+      await apiClient.put("/accounts/job-seekers/update_profile/", { skills: skillsString });
+      // Optimistically update
+      setSkillsList(newSkills);
+      // Then refresh to be safe
+      const profileResponse = await apiClient.get("/accounts/job-seekers/my_profile/");
+      setProfileData(profileResponse.data);
+      if (profileResponse.data?.profile?.skills_list) {
+        setSkillsList(profileResponse.data.profile.skills_list);
+      }
+    } catch (error) {
+      console.error("Error adding skill:", error);
+      alert("Failed to add skill.");
+    }
+  };
+
+  const handleRemoveSkill = async (skillToRemove) => {
+    const newSkills = skillsList.filter(skill => skill !== skillToRemove);
+    const skillsString = newSkills.join(",");
+
+    try {
+      await apiClient.put("/accounts/job-seekers/update_profile/", { skills: skillsString });
+      // Optimistically update
+      setSkillsList(newSkills);
+
+      const profileResponse = await apiClient.get("/accounts/job-seekers/my_profile/");
+      setProfileData(profileResponse.data);
+      if (profileResponse.data?.profile?.skills_list) {
+        setSkillsList(profileResponse.data.profile.skills_list);
+      }
+    } catch (error) {
+      console.error("Error removing skill:", error);
+      alert("Failed to remove skill.");
+    }
+  };
+
   if (!user) return null;
 
   if (loading) {
@@ -155,7 +205,6 @@ export default function ProfileDashboard() {
   return (
     <div className="bg-white min-h-screen py-8">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
         {/* Header */}
         <div className="bg-slate-900 rounded-2xl p-8 mb-8 shadow-lg relative overflow-hidden">
           {/* Background pattern/gradient */}
@@ -411,7 +460,11 @@ export default function ProfileDashboard() {
                           </p>
                         </div>
                         <a
-                          href={`http://localhost:8000${profileData.profile.resume}`}
+                          href={
+                            profileData.profile.resume.startsWith('http')
+                              ? profileData.profile.resume
+                              : `http://localhost:8000${profileData.profile.resume}`
+                          }
                           target="_blank"
                           rel="noopener noreferrer"
                           className="px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white font-semibold rounded-lg transition"
@@ -449,22 +502,31 @@ export default function ProfileDashboard() {
                 <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
                   <div className="flex items-center justify-between mb-6">
                     <h2 className="text-2xl font-bold text-gray-900">Skills</h2>
-                    <button className="flex items-center gap-2 px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white font-semibold rounded-lg transition">
+                    <button
+                      onClick={handleAddSkill}
+                      className="flex items-center gap-2 px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white font-semibold rounded-lg transition"
+                    >
                       <Plus size={18} />
                       Add Skill
                     </button>
                   </div>
                   <div className="flex flex-wrap gap-2">
-                    {["JavaScript", "React", "Python", "Django", "REST API"].map(
-                      (skill) => (
+                    {skillsList && skillsList.length > 0 ? (
+                      skillsList.map((skill) => (
                         <span
                           key={skill}
                           className="px-4 py-2 bg-slate-100 text-slate-700 rounded-full font-semibold text-sm flex items-center gap-2"
                         >
                           {skill}
-                          <X size={16} className="cursor-pointer hover:text-red-600" />
+                          <X
+                            size={16}
+                            className="cursor-pointer hover:text-red-600"
+                            onClick={() => handleRemoveSkill(skill)}
+                          />
                         </span>
-                      )
+                      ))
+                    ) : (
+                      <p className="text-gray-500 italic">No skills added yet.</p>
                     )}
                   </div>
                 </div>

@@ -31,7 +31,7 @@ export default function EmployerApplications() {
     const fetchApplications = async () => {
       try {
         setLoading(true);
-        const res = await axiosInstance.get("/api/applications/");
+        const res = await axiosInstance.get("/applications/");
 
         let appsData = [];
         if (Array.isArray(res.data)) {
@@ -74,7 +74,7 @@ export default function EmployerApplications() {
         setSelectedApp(prev => ({ ...prev, status: newStatus }));
       }
 
-      await axiosInstance.patch(`/api/applications/${appId}/update_status/`, {
+      await axiosInstance.patch(`/applications/${appId}/update_status/`, {
         status: newStatus,
       });
 
