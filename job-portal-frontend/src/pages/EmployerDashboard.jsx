@@ -12,72 +12,6 @@ export default function EmployerDashboard() {
     }
   }, [user, navigate]);
 
-  const pageStyle = {
-    minHeight: "calc(100vh - 200px)",
-    paddingTop: "2rem",
-    paddingBottom: "4rem"
-  };
-
-  const heroStyle = {
-    maxWidth: "68rem",
-    margin: "0 auto 3rem",
-    padding: "4rem 2rem",
-    textAlign: "center",
-    background: "linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%)",
-    borderRadius: "1rem",
-    border: "1px solid rgba(79, 70, 229, 0.2)"
-  };
-
-  const headingStyle = {
-    fontSize: "3rem",
-    fontWeight: "800",
-    marginBottom: "1rem",
-    background: "linear-gradient(135deg, #4f46e5 0%, #a855f7 100%)",
-    WebkitBackgroundClip: "text",
-    WebkitTextFillColor: "transparent",
-    backgroundClip: "text"
-  };
-
-  const descriptionStyle = {
-    color: "#4b5563",
-    fontSize: "1.125rem",
-    marginBottom: "2rem",
-    fontWeight: "500"
-  };
-
-  const gridStyle = {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-    gap: "2rem",
-    marginTop: "3rem",
-    maxWidth: "68rem",
-    margin: "3rem auto",
-    padding: "0 2rem"
-  };
-
-  const cardStyle = {
-    padding: "2rem",
-    background: "linear-gradient(135deg, #ffffff 0%, #f0f4ff 100%)",
-    borderRadius: "1rem",
-    border: "1px solid rgba(79, 70, 229, 0.2)",
-    boxShadow: "0 4px 20px rgba(79, 70, 229, 0.1)",
-    transition: "all 0.3s ease"
-  };
-
-  const buttonStyle = {
-    padding: "1rem 2rem",
-    borderRadius: "0.5rem",
-    fontWeight: "700",
-    fontSize: "1rem",
-    border: "none",
-    cursor: "pointer",
-    transition: "all 0.3s ease",
-    boxShadow: "0 4px 15px rgba(0, 0, 0, 0.1)",
-    background: "linear-gradient(135deg, #4f46e5 0%, #a855f7 100%)",
-    color: "white",
-    marginTop: "1rem"
-  };
-
   const features = [
     {
       icon: "📋",
@@ -118,45 +52,36 @@ export default function EmployerDashboard() {
   ];
 
   return (
-    <div style={pageStyle}>
-      <div style={heroStyle}>
-        <h1 style={headingStyle}>
-          Welcome, {user?.user?.first_name || user?.username}! 👔
-        </h1>
-        <p style={descriptionStyle}>
-          Manage your job postings, review applications, and find the right talent
-        </p>
-        <button
-          onClick={() => navigate("/employer/post-job")}
-          style={buttonStyle}
-          onMouseEnter={(e) => (e.target.style.transform = "translateY(-2px)", e.target.style.boxShadow = "0 6px 25px rgba(79, 70, 229, 0.4)")}
-          onMouseLeave={(e) => (e.target.style.transform = "translateY(0)", e.target.style.boxShadow = "0 4px 15px rgba(0, 0, 0, 0.1)")}
-        >
-          ➕ Post New Job
-        </button>
+    <div className="min-h-[calc(100vh-200px)] py-8 pb-16 bg-white">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+        <div className="py-16 px-4 md:px-8 text-center bg-gradient-to-br from-indigo-500/10 to-purple-500/10 rounded-2xl border border-indigo-500/20">
+          <h1 className="text-3xl md:text-5xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-br from-indigo-600 to-purple-600 tracking-tight">
+            Welcome, {user?.user?.first_name || user?.username}! 👔
+          </h1>
+          <p className="text-gray-600 text-lg md:text-xl font-medium mb-8 max-w-2xl mx-auto">
+            Manage your job postings, review applications, and find the right talent
+          </p>
+          <button
+            onClick={() => navigate("/employer/post-job")}
+            className="px-8 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold rounded-lg shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 text-base md:text-lg"
+          >
+            ➕ Post New Job
+          </button>
+        </div>
       </div>
 
-      <div style={gridStyle}>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {features.map((feature, index) => (
-          <div 
-            key={index} 
-            style={cardStyle}
+          <div
+            key={index}
             onClick={feature.action}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.boxShadow = "0 8px 30px rgba(79, 70, 229, 0.2)";
-              e.currentTarget.style.transform = "translateY(-5px)";
-              e.currentTarget.style.cursor = "pointer";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.boxShadow = "0 4px 20px rgba(79, 70, 229, 0.1)";
-              e.currentTarget.style.transform = "translateY(0)";
-            }}
+            className="group p-8 bg-gradient-to-br from-white to-blue-50/50 rounded-2xl border border-indigo-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer"
           >
-            <div style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>{feature.icon}</div>
-            <h3 style={{ fontSize: "1.25rem", fontWeight: "700", marginBottom: "0.75rem", color: "#0f3460" }}>
+            <div className="text-4xl mb-4 transform group-hover:scale-110 transition-transform duration-300">{feature.icon}</div>
+            <h3 className="text-xl font-bold mb-3 text-slate-800 group-hover:text-indigo-600 transition-colors">
               {feature.title}
             </h3>
-            <p style={{ color: "#4b5563", lineHeight: "1.6" }}>
+            <p className="text-gray-600 leading-relaxed group-hover:text-gray-700">
               {feature.description}
             </p>
           </div>

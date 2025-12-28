@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import useAxios from "../../hooks/useAxios";
+import { Eye, List, Trash2, Activity, MapPin, Briefcase, Calendar, Clock, DollarSign } from "lucide-react";
 
 export default function EmployerJobs() {
   const navigate = useNavigate();
@@ -62,326 +63,175 @@ export default function EmployerJobs() {
     }
   };
 
-  const pageStyle = {
-    minHeight: "calc(100vh - 200px)",
-    paddingTop: "2rem",
-    paddingBottom: "4rem",
-    background: "linear-gradient(135deg, rgba(79, 70, 229, 0.05) 0%, rgba(168, 85, 247, 0.05) 100%)"
-  };
-
-  const containerStyle = {
-    maxWidth: "90rem",
-    margin: "0 auto",
-    padding: "2rem"
-  };
-
-  const headingStyle = {
-    fontSize: "2.25rem",
-    fontWeight: "800",
-    marginBottom: "1.5rem",
-    background: "linear-gradient(135deg, #4f46e5 0%, #a855f7 100%)",
-    WebkitBackgroundClip: "text",
-    WebkitTextFillColor: "transparent",
-    backgroundClip: "text"
-  };
-
-  const emptyStyle = {
-    textAlign: "center",
-    padding: "3rem 2rem",
-    background: "white",
-    borderRadius: "1rem",
-    border: "1px solid #e0e0e0"
-  };
-
-  const gridStyle = {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fill, minmax(350px, 1fr))",
-    gap: "2rem",
-    marginTop: "2rem"
-  };
-
-  const cardStyle = {
-    background: "white",
-    borderRadius: "1rem",
-    border: "1px solid #e0e0e0",
-    boxShadow: "0 4px 20px rgba(79, 70, 229, 0.1)",
-    padding: "1.5rem",
-    transition: "all 0.3s ease",
-    display: "flex",
-    flexDirection: "column"
-  };
-
-  const jobTitleStyle = {
-    fontSize: "1.25rem",
-    fontWeight: "700",
-    color: "#0f3460",
-    marginBottom: "0.5rem"
-  };
-
-  const companyStyle = {
-    fontSize: "0.95rem",
-    color: "#4f46e5",
-    fontWeight: "600",
-    marginBottom: "0.5rem"
-  };
-
-  const locationStyle = {
-    fontSize: "0.875rem",
-    color: "#666",
-    marginBottom: "1rem"
-  };
-
-  const infoRowStyle = {
-    display: "flex",
-    justifyContent: "space-between",
-    marginBottom: "0.5rem",
-    fontSize: "0.875rem",
-    color: "#666"
-  };
-
-  const badgeStyle = (type) => {
+  const getBadgeColor = (type) => {
     const colors = {
-      full_time: { bg: "#dcfce7", color: "#166534" },
-      part_time: { bg: "#dbeafe", color: "#1e40af" },
-      contract: { bg: "#fef3c7", color: "#92400e" },
-      internship: { bg: "#f3e8ff", color: "#581c87" },
-      temporary: { bg: "#fee2e2", color: "#991b1b" }
+      full_time: "bg-green-100 text-green-800",
+      part_time: "bg-blue-100 text-blue-800",
+      contract: "bg-amber-100 text-amber-800",
+      internship: "bg-purple-100 text-purple-800",
+      temporary: "bg-red-100 text-red-800"
     };
-    const color = colors[type] || { bg: "#f3f4f6", color: "#374151" };
-    return {
-      display: "inline-block",
-      padding: "0.25rem 0.75rem",
-      borderRadius: "0.25rem",
-      background: color.bg,
-      color: color.color,
-      fontSize: "0.75rem",
-      fontWeight: "600"
-    };
-  };
-
-  const activeStatusStyle = (isActive) => ({
-    display: "inline-block",
-    padding: "0.25rem 0.75rem",
-    borderRadius: "0.25rem",
-    background: isActive ? "#dcfce7" : "#fee2e2",
-    color: isActive ? "#166534" : "#991b1b",
-    fontSize: "0.75rem",
-    fontWeight: "600"
-  });
-
-  const buttonGroupStyle = {
-    display: "flex",
-    gap: "0.5rem",
-    marginTop: "1rem",
-    flexWrap: "wrap"
-  };
-
-  const buttonStyle = {
-    flex: 1,
-    padding: "0.5rem 1rem",
-    borderRadius: "0.375rem",
-    border: "none",
-    fontWeight: "600",
-    fontSize: "0.875rem",
-    cursor: "pointer",
-    transition: "all 0.3s ease",
-    minWidth: "100px"
-  };
-
-  const primaryButtonStyle = {
-    ...buttonStyle,
-    background: "linear-gradient(135deg, #4f46e5 0%, #a855f7 100%)",
-    color: "white"
-  };
-
-  const secondaryButtonStyle = {
-    ...buttonStyle,
-    background: "#06b6d4",
-    color: "white"
-  };
-
-  const dangerButtonStyle = {
-    ...buttonStyle,
-    background: "#f87171",
-    color: "white"
+    return colors[type] || "bg-gray-100 text-gray-800";
   };
 
   if (loading) {
     return (
-      <div style={pageStyle}>
-        <div style={containerStyle}>
-          <h1 style={headingStyle}>💼 My Job Postings</h1>
-          <div style={emptyStyle}>Loading your job postings...</div>
+      <div className="min-h-screen py-8 px-4 sm:px-6 lg:px-8 bg-gray-50">
+        <div className="max-w-7xl mx-auto">
+          <h1 className="text-3xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">
+            💼 My Job Postings
+          </h1>
+          <div className="bg-white rounded-xl p-12 text-center border border-gray-200">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 mx-auto mb-4"></div>
+            <p className="text-gray-500">Loading your job postings...</p>
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <div style={pageStyle}>
-      <div style={containerStyle}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "2rem" }}>
-          <h1 style={headingStyle}>💼 My Job Postings</h1>
+    <div className="min-h-screen py-8 pb-20 bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
+          <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">
+            💼 My Job Postings
+          </h1>
           <button
             onClick={() => navigate("/employer/post-job")}
-            style={{
-              ...primaryButtonStyle,
-              padding: "0.75rem 1.5rem",
-              minWidth: "auto"
-            }}
-            onMouseEnter={(e) => (e.target.style.transform = "translateY(-2px)", e.target.style.boxShadow = "0 6px 25px rgba(79, 70, 229, 0.4)")}
-            onMouseLeave={(e) => (e.target.style.transform = "translateY(0)", e.target.style.boxShadow = "none")}
+            className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold rounded-lg shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
           >
-            ➕ Post New Job
+            <span>➕</span> Post New Job
           </button>
         </div>
 
         {error && (
-          <div style={{
-            padding: "1rem",
-            marginBottom: "1.5rem",
-            background: "#fee",
-            border: "1px solid #fcc",
-            borderRadius: "0.5rem",
-            color: "#c33"
-          }}>
-            {error}
+          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 flex items-center gap-2">
+            <span>⚠️</span> {error}
           </div>
         )}
 
         {jobs.length === 0 ? (
-          <div style={emptyStyle}>
-            <p style={{ fontSize: "1.125rem", marginBottom: "1rem" }}>No job postings yet</p>
-            <p style={{ color: "#999", marginBottom: "1.5rem" }}>Start hiring by posting your first job opportunity</p>
+          <div className="bg-white rounded-xl p-16 text-center border border-gray-200 shadow-sm">
+            <div className="text-6xl mb-4">📋</div>
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">No job postings yet</h2>
+            <p className="text-gray-500 mb-8 max-w-md mx-auto">
+              Start building your team by posting your first job opportunity. It only takes a few minutes!
+            </p>
             <button
               onClick={() => navigate("/employer/post-job")}
-              style={{
-                ...primaryButtonStyle,
-                display: "inline-block",
-                padding: "0.75rem 2rem"
-              }}
-              onMouseEnter={(e) => (e.target.style.transform = "translateY(-2px)", e.target.style.boxShadow = "0 6px 25px rgba(79, 70, 229, 0.4)")}
-              onMouseLeave={(e) => (e.target.style.transform = "translateY(0)", e.target.style.boxShadow = "none")}
+              className="px-8 py-3 bg-indigo-600 text-white font-bold rounded-lg hover:bg-indigo-700 transition-colors shadow-md"
             >
-              ➕ Post Your First Job
+              Post Your First Job
             </button>
           </div>
         ) : (
-          <div style={gridStyle}>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {jobs.map(job => (
               <div
                 key={job.id}
-                style={cardStyle}
-                onMouseEnter={(e) => (e.currentTarget.style.boxShadow = "0 8px 30px rgba(79, 70, 229, 0.2)", e.currentTarget.style.transform = "translateY(-5px)")}
-                onMouseLeave={(e) => (e.currentTarget.style.boxShadow = "0 4px 20px rgba(79, 70, 229, 0.1)", e.currentTarget.style.transform = "translateY(0)")}
+                className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col p-6 group"
               >
-                <h3 style={jobTitleStyle}>{job.title}</h3>
-                <p style={companyStyle}>{job.company}</p>
-                <p style={locationStyle}>📍 {job.location}</p>
-
-                <div style={{ marginBottom: "1rem" }}>
-                  <span style={badgeStyle(job.job_type)}>{job.job_type.replace('_', ' ').toUpperCase()}</span>
-                  <span style={{ marginLeft: "0.5rem", ...activeStatusStyle(job.is_active) }}>
+                <div className="flex justify-between items-start mb-4">
+                  <div>
+                    <h3 className="text-lg font-bold text-slate-800 mb-1 line-clamp-1" title={job.title}>
+                      {job.title}
+                    </h3>
+                    <div className="flex items-center gap-2 text-sm text-indigo-600 font-medium">
+                      <Briefcase size={14} />
+                      <span>{job.company}</span>
+                    </div>
+                  </div>
+                  <div className={`px-2 py-1 rounded w-fit text-xs font-bold uppercase tracking-wider ${job.is_active ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}`}>
                     {job.is_active ? "Active" : "Inactive"}
-                  </span>
-                </div>
-
-                <div style={infoRowStyle}>
-                  <span>📧 Applications:</span>
-                  <strong>{job.applications_count || 0}</strong>
-                </div>
-
-                {job.salary_min && job.salary_max && (
-                  <div style={infoRowStyle}>
-                    <span>💰 Salary:</span>
-                    <strong>{job.salary_min} - {job.salary_max} LPA</strong>
                   </div>
-                )}
-
-                <div style={infoRowStyle}>
-                  <span>📅 Posted:</span>
-                  <strong>{new Date(job.created_at).toLocaleDateString()}</strong>
                 </div>
 
-                {job.application_deadline && (
-                  <div style={infoRowStyle}>
-                    <span>⏰ Deadline:</span>
-                    <strong>{new Date(job.application_deadline).toLocaleDateString()}</strong>
+                <div className="space-y-2 mb-6 flex-1">
+                  <div className="flex items-center gap-2 text-sm text-gray-500">
+                    <MapPin size={16} />
+                    <span>{job.location}</span>
                   </div>
-                )}
 
-                <p style={{ fontSize: "0.875rem", color: "#666", marginTop: "1rem", lineHeight: "1.5", flex: 1 }}>
-                  {job.description.substring(0, 150)}...
-                </p>
+                  <div className="flex flex-wrap gap-2 pt-1">
+                    <span className={`px-2.5 py-0.5 rounded text-xs font-semibold ${getBadgeColor(job.job_type)}`}>
+                      {job.job_type.replace('_', ' ').toUpperCase()}
+                    </span>
+                  </div>
 
-                <div style={buttonGroupStyle}>
-                  <button
-                    onClick={() => navigate(`/jobs/${job.id}`)}
-                    style={primaryButtonStyle}
-                    onMouseEnter={(e) => (e.target.style.transform = "translateY(-1px)")}
-                    onMouseLeave={(e) => (e.target.style.transform = "translateY(0)")}
-                  >
-                    👁️ View
-                  </button>
-                  <button
-                    onClick={() => navigate(`/employer/applications?job=${job.id}`)}
-                    style={secondaryButtonStyle}
-                    onMouseEnter={(e) => (e.target.style.transform = "translateY(-1px)")}
-                    onMouseLeave={(e) => (e.target.style.transform = "translateY(0)")}
-                  >
-                    📋 Apps ({job.applications_count || 0})
-                  </button>
-                  <button
-                    onClick={() => toggleJobActive(job.id, job.is_active)}
-                    style={{
-                      ...buttonStyle,
-                      background: job.is_active ? "#fbbf24" : "#22c55e",
-                      color: "white"
-                    }}
-                    onMouseEnter={(e) => (e.target.style.transform = "translateY(-1px)")}
-                    onMouseLeave={(e) => (e.target.style.transform = "translateY(0)")}
-                    title={job.is_active ? "Click to deactivate" : "Click to activate"}
-                  >
-                    {job.is_active ? "🔴" : "🟢"}
-                  </button>
-                  <button
-                    onClick={() => deleteJob(job.id)}
-                    disabled={deleteLoading[job.id]}
-                    style={{
-                      ...dangerButtonStyle,
-                      opacity: deleteLoading[job.id] ? 0.6 : 1,
-                      cursor: deleteLoading[job.id] ? "not-allowed" : "pointer"
-                    }}
-                    onMouseEnter={(e) => !deleteLoading[job.id] && (e.target.style.transform = "translateY(-1px)")}
-                    onMouseLeave={(e) => !deleteLoading[job.id] && (e.target.style.transform = "translateY(0)")}
-                  >
-                    🗑️ Delete
-                  </button>
+                  {job.salary_min && job.salary_max && (
+                    <div className="flex items-center gap-2 text-sm text-gray-600">
+                      <DollarSign size={16} />
+                      <span>{job.salary_min} - {job.salary_max} LPA</span>
+                    </div>
+                  )}
+
+                  <div className="flex items-center gap-2 text-sm text-gray-500 mt-2">
+                    <Calendar size={16} />
+                    <span>Posted {new Date(job.created_at).toLocaleDateString()}</span>
+                  </div>
+
+                  <p className="text-sm text-gray-600 pt-2 line-clamp-3 leading-relaxed">
+                    {job.description}
+                  </p>
+                </div>
+
+                <div className="pt-4 border-t border-gray-100">
+                  <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
+                    <span className="flex items-center gap-1">
+                      <List size={16} />
+                      {job.applications_count || 0} Applications
+                    </span>
+                  </div>
+
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => navigate(`/employer/applications?job=${job.id}`)}
+                      className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-indigo-50 text-indigo-700 font-semibold rounded-lg hover:bg-indigo-100 transition-colors text-sm"
+                      title="View Applications"
+                    >
+                      <List size={16} /> Apps
+                    </button>
+
+                    <button
+                      onClick={() => toggleJobActive(job.id, job.is_active)}
+                      className={`p-2 rounded-lg transition-colors ${job.is_active ? "bg-yellow-50 text-yellow-600 hover:bg-yellow-100" : "bg-green-50 text-green-600 hover:bg-green-100"}`}
+                      title={job.is_active ? "Deactivate Job" : "Activate Job"}
+                    >
+                      <Activity size={18} />
+                    </button>
+
+                    <button
+                      onClick={() => navigate(`/jobs/${job.id}`)}
+                      className="p-2 bg-gray-50 text-gray-600 rounded-lg hover:bg-gray-100 transition-colors"
+                      title="View Public Page"
+                    >
+                      <Eye size={18} />
+                    </button>
+
+                    <button
+                      onClick={() => deleteJob(job.id)}
+                      disabled={deleteLoading[job.id]}
+                      className="p-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition-colors disabled:opacity-50"
+                      title="Delete Job"
+                    >
+                      <Trash2 size={18} />
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
         )}
 
-        {/* Back Button */}
-        <button
-          onClick={() => navigate("/employer-dashboard")}
-          style={{
-            marginTop: "2rem",
-            padding: "0.75rem 1.5rem",
-            background: "linear-gradient(135deg, #06b6d4 0%, #0891b2 100%)",
-            color: "white",
-            border: "none",
-            borderRadius: "0.5rem",
-            fontWeight: "700",
-            cursor: "pointer",
-            transition: "all 0.3s ease"
-          }}
-          onMouseEnter={(e) => (e.target.style.transform = "translateY(-2px)", e.target.style.boxShadow = "0 6px 25px rgba(6, 182, 212, 0.4)")}
-          onMouseLeave={(e) => (e.target.style.transform = "translateY(0)", e.target.style.boxShadow = "none")}
-        >
-          ← Back to Dashboard
-        </button>
+        <div className="mt-8">
+          <button
+            onClick={() => navigate("/employer-dashboard")}
+            className="flex items-center gap-2 text-gray-600 font-semibold hover:text-indigo-600 transition-colors"
+          >
+            ← Back to Dashboard
+          </button>
+        </div>
       </div>
     </div>
   );
