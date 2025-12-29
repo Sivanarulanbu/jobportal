@@ -24,37 +24,15 @@ export default function Layout({ children }) {
   }, []);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        minHeight: "100vh",
-        height: "100%",
-        width: "100%",
-        backgroundColor: "#0f172a",
-      }}
-    >
+    <div className="flex flex-col min-h-screen bg-gray-50">
       <Navbar />
       {networkError && (
-        <div style={{
-          backgroundColor: "#fee2e2",
-          color: "#991b1b",
-          padding: "1rem",
-          textAlign: "center"
-        }}>
+        <div className="bg-red-50 text-red-800 px-4 py-3 text-center border-b border-red-200">
           {networkError}
         </div>
       )}
-      <main style={{
-        flex: 1,
-        padding: "1.5rem",
-        backgroundColor: "#0f172a",
-        width: "100%",
-        overflowY: "auto",
-      }}>
-        <div className="container" style={{ width: "100%" }}>
-          {children}
-        </div>
+      <main className="flex-1 w-full">
+        {children}
       </main>
       <Footer />
     </div>
