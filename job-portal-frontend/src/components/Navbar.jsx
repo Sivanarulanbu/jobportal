@@ -16,12 +16,11 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-white border-b border-gray-200">
+    <nav className="bg-white border-b border-gray-200 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 text-xl font-bold text-gray-900 hover:text-[#0A66C2] transition-colors">
+          <Link to="/" className="flex items-center gap-3 text-xl font-bold text-gray-900 hover:text-[#6C5CE7] transition-colors">
             <div className="w-12 h-12 rounded-full overflow-hidden border border-gray-100 flex items-center justify-center">
               <Logo className="w-full h-full object-cover transform scale-[3.0]" />
             </div>
@@ -32,7 +31,7 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-6">
             <Link
               to="/jobs"
-              className="text-gray-600 hover:text-[#0A66C2] font-medium transition-colors"
+              className="text-gray-700 hover:text-[#6C5CE7] font-medium transition-colors"
             >
               Browse Jobs
             </Link>
@@ -41,7 +40,7 @@ export default function Navbar() {
               <>
                 <Link
                   to="/profile"
-                  className="text-gray-600 hover:text-[#0A66C2] font-medium transition-colors"
+                  className="text-gray-700 hover:text-[#6C5CE7] font-medium transition-colors"
                 >
                   Saved Jobs
                 </Link>
@@ -50,9 +49,9 @@ export default function Navbar() {
                 <div className="relative group">
                   <button
                     onClick={() => setDropdownOpen(!dropdownOpen)}
-                    className="flex items-center gap-2 px-3 py-2 rounded-md text-gray-700 hover:text-[#0A66C2] hover:bg-gray-50 transition-all"
+                    className="flex items-center gap-2 px-3 py-2 rounded-md text-gray-700 hover:text-[#6C5CE7] hover:bg-purple-50 transition-all"
                   >
-                    <div className="w-8 h-8 bg-[#0A66C2] rounded-full flex items-center justify-center text-white text-sm font-semibold">
+                    <div className="w-8 h-8 bg-gradient-to-br from-[#6C5CE7] to-[#A29BFE] rounded-full flex items-center justify-center text-white text-sm font-semibold">
                       {(user.first_name || user.username || "U").charAt(0).toUpperCase()}
                     </div>
                     <span className="font-medium">
@@ -62,11 +61,11 @@ export default function Navbar() {
                   </button>
 
                   {/* Dropdown Menu */}
-                  <div className="absolute right-0 mt-1 w-52 bg-white border border-gray-200 rounded-md shadow-lg z-50 hidden group-hover:block">
+                  <div className="absolute right-0 mt-1 w-52 bg-white border border-gray-200 rounded-lg shadow-lg z-50 hidden group-hover:block">
                     <div className="py-1">
                       <Link
                         to="/profile"
-                        className="block px-4 py-2.5 text-gray-700 hover:text-[#0A66C2] hover:bg-gray-50 font-medium transition-colors"
+                        className="block px-4 py-2.5 text-gray-700 hover:text-[#6C5CE7] hover:bg-purple-50 font-medium transition-colors"
                       >
                         Profile Settings
                       </Link>
@@ -74,13 +73,13 @@ export default function Navbar() {
                         <>
                           <Link
                             to="/employer-dashboard"
-                            className="block px-4 py-2.5 text-gray-700 hover:text-[#0A66C2] hover:bg-gray-50 font-medium transition-colors"
+                            className="block px-4 py-2.5 text-gray-700 hover:text-[#6C5CE7] hover:bg-purple-50 font-medium transition-colors"
                           >
                             Dashboard
                           </Link>
                           <Link
                             to="/employer/post-job"
-                            className="block px-4 py-2.5 text-gray-700 hover:text-[#0A66C2] hover:bg-gray-50 font-medium transition-colors"
+                            className="block px-4 py-2.5 text-gray-700 hover:text-[#6C5CE7] hover:bg-purple-50 font-medium transition-colors"
                           >
                             Post a Job
                           </Link>
@@ -89,7 +88,7 @@ export default function Navbar() {
                       {user.profile?.user_type === "job_seeker" && (
                         <Link
                           to="/job-seeker-dashboard"
-                          className="block px-4 py-2.5 text-gray-700 hover:text-[#0A66C2] hover:bg-gray-50 font-medium transition-colors"
+                          className="block px-4 py-2.5 text-gray-700 hover:text-[#6C5CE7] hover:bg-purple-50 font-medium transition-colors"
                         >
                           Dashboard
                         </Link>
@@ -109,15 +108,15 @@ export default function Navbar() {
               <>
                 <Link
                   to="/auth"
-                  className="px-5 py-2 text-[#0A66C2] font-semibold hover:bg-blue-50 rounded-md transition-colors"
+                  className="px-5 py-2 text-[#6C5CE7] font-semibold hover:bg-purple-50 rounded-md transition-colors"
                 >
                   Sign In
                 </Link>
                 <Link
                   to="/auth"
-                  className="px-5 py-2 bg-[#0A66C2] hover:bg-[#004182] text-white font-semibold rounded-md transition-colors shadow-sm"
+                  className="px-5 py-2 bg-[#6C5CE7] hover:bg-[#5B4BC4] text-white font-semibold rounded-md transition-colors shadow-sm"
                 >
-                  Get Started
+                  Register
                 </Link>
               </>
             )}
@@ -126,7 +125,7 @@ export default function Navbar() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden text-gray-700 hover:text-[#0A66C2] p-2 rounded-md hover:bg-gray-50 transition-colors"
+            className="md:hidden text-gray-700 hover:text-[#6C5CE7] p-2 rounded-md hover:bg-purple-50 transition-colors"
           >
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -139,7 +138,7 @@ export default function Navbar() {
               <Link
                 to="/jobs"
                 onClick={() => setMobileMenuOpen(false)}
-                className="block px-4 py-2.5 text-gray-700 hover:text-[#0A66C2] hover:bg-gray-50 rounded-md transition-colors font-medium"
+                className="block px-4 py-2.5 text-gray-700 hover:text-[#6C5CE7] hover:bg-purple-50 rounded-md transition-colors font-medium"
               >
                 Browse Jobs
               </Link>
@@ -149,7 +148,7 @@ export default function Navbar() {
                   <Link
                     to="/profile"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block px-4 py-2.5 text-gray-700 hover:text-[#0A66C2] hover:bg-gray-50 rounded-md transition-colors font-medium"
+                    className="block px-4 py-2.5 text-gray-700 hover:text-[#6C5CE7] hover:bg-purple-50 rounded-md transition-colors font-medium"
                   >
                     Profile
                   </Link>
@@ -158,14 +157,14 @@ export default function Navbar() {
                       <Link
                         to="/employer-dashboard"
                         onClick={() => setMobileMenuOpen(false)}
-                        className="block px-4 py-2.5 text-gray-700 hover:text-[#0A66C2] hover:bg-gray-50 rounded-md transition-colors font-medium"
+                        className="block px-4 py-2.5 text-gray-700 hover:text-[#6C5CE7] hover:bg-purple-50 rounded-md transition-colors font-medium"
                       >
                         Dashboard
                       </Link>
                       <Link
                         to="/employer/post-job"
                         onClick={() => setMobileMenuOpen(false)}
-                        className="block px-4 py-2.5 text-gray-700 hover:text-[#0A66C2] hover:bg-gray-50 rounded-md transition-colors font-medium"
+                        className="block px-4 py-2.5 text-gray-700 hover:text-[#6C5CE7] hover:bg-purple-50 rounded-md transition-colors font-medium"
                       >
                         Post a Job
                       </Link>
@@ -175,7 +174,7 @@ export default function Navbar() {
                     <Link
                       to="/job-seeker-dashboard"
                       onClick={() => setMobileMenuOpen(false)}
-                      className="block px-4 py-2.5 text-gray-700 hover:text-[#0A66C2] hover:bg-gray-50 rounded-md transition-colors font-medium"
+                      className="block px-4 py-2.5 text-gray-700 hover:text-[#6C5CE7] hover:bg-purple-50 rounded-md transition-colors font-medium"
                     >
                       Dashboard
                     </Link>
@@ -196,16 +195,16 @@ export default function Navbar() {
                   <Link
                     to="/auth"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block w-full text-center px-4 py-2.5 border border-[#0A66C2] text-[#0A66C2] font-semibold rounded-md hover:bg-blue-50 transition-colors"
+                    className="block w-full text-center px-4 py-2.5 border border-[#6C5CE7] text-[#6C5CE7] font-semibold rounded-md hover:bg-purple-50 transition-colors"
                   >
                     Sign In
                   </Link>
                   <Link
                     to="/auth"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="block w-full text-center px-4 py-2.5 bg-[#0A66C2] hover:bg-[#004182] text-white font-semibold rounded-md transition-colors"
+                    className="block w-full text-center px-4 py-2.5 bg-[#6C5CE7] hover:bg-[#5B4BC4] text-white font-semibold rounded-md transition-colors"
                   >
-                    Get Started
+                    Register
                   </Link>
                 </div>
               )}

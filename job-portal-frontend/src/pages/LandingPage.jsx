@@ -39,22 +39,28 @@ export default function LandingPage() {
 
   return (
     <div className="bg-white">
-      {/* Hero Section - Mesh Gradient */}
-      <section className="relative bg-mesh py-20 md:py-32 overflow-hidden">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Hero Section - Naukri Purple Gradient */}
+      <section className="relative bg-gradient-to-br from-[#6C5CE7] via-[#7C6CE9] to-[#A29BFE] py-16 md:py-24 overflow-hidden">
+        {/* Decorative Elements */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-20 left-10 w-72 h-72 bg-white rounded-full blur-3xl"></div>
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+        </div>
+
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Main Heading */}
           <div className="text-center mb-10">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 tracking-tight">
-              Find Your Dream Job <span className="text-[#0A66C2]">Today</span>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 tracking-tight">
+              Find Your Dream Job <span className="text-purple-200">Today</span>
             </h1>
-            <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-purple-100 max-w-2xl mx-auto">
               Discover thousands of opportunities from top companies. Your next career move starts here.
             </p>
           </div>
 
           {/* Central Search Bar */}
           <form onSubmit={handleSearch} className="max-w-4xl mx-auto">
-            <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-2 md:p-3">
+            <div className="bg-white rounded-lg shadow-xl p-2 md:p-3">
               <div className="flex flex-col md:flex-row gap-2 md:gap-3">
                 {/* Job Title Input */}
                 <div className="flex-1 relative">
@@ -64,7 +70,7 @@ export default function LandingPage() {
                     placeholder="Job title, keywords, or company"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full pl-12 pr-4 py-3.5 rounded-md bg-gray-50 border border-transparent text-gray-900 placeholder-gray-500 focus:outline-none focus:bg-white focus:border-[#0A66C2] focus:ring-2 focus:ring-blue-100 transition-all"
+                    className="w-full pl-12 pr-4 py-3.5 rounded-md bg-gray-50 border border-transparent text-gray-900 placeholder-gray-500 focus:outline-none focus:bg-white focus:border-[#6C5CE7] focus:ring-2 focus:ring-purple-100 transition-all"
                   />
                 </div>
 
@@ -76,14 +82,14 @@ export default function LandingPage() {
                     placeholder="City, state, or remote"
                     value={locationQuery}
                     onChange={(e) => setLocationQuery(e.target.value)}
-                    className="w-full pl-12 pr-4 py-3.5 rounded-md bg-gray-50 border border-transparent text-gray-900 placeholder-gray-500 focus:outline-none focus:bg-white focus:border-[#0A66C2] focus:ring-2 focus:ring-blue-100 transition-all"
+                    className="w-full pl-12 pr-4 py-3.5 rounded-md bg-gray-50 border border-transparent text-gray-900 placeholder-gray-500 focus:outline-none focus:bg-white focus:border-[#6C5CE7] focus:ring-2 focus:ring-purple-100 transition-all"
                   />
                 </div>
 
                 {/* Search Button */}
                 <button
                   type="submit"
-                  className="px-8 py-3.5 bg-[#0A66C2] hover:bg-[#004182] text-white font-semibold rounded-md transition-all shadow-sm hover:shadow-md"
+                  className="px-8 py-3.5 bg-[#6C5CE7] hover:bg-[#5B4BC4] text-white font-semibold rounded-md transition-all shadow-sm hover:shadow-md"
                 >
                   Search Jobs
                 </button>
@@ -93,12 +99,12 @@ export default function LandingPage() {
 
           {/* Quick Links */}
           <div className="flex flex-wrap justify-center gap-3 mt-6">
-            <span className="text-gray-500 text-sm">Popular:</span>
+            <span className="text-purple-200 text-sm">Popular:</span>
             {["Remote", "Full Time", "Engineering", "Marketing", "Design"].map((tag) => (
               <button
                 key={tag}
                 onClick={() => navigate(`/jobs?search=${tag}`)}
-                className="text-sm text-[#0A66C2] hover:text-[#004182] hover:underline transition-colors"
+                className="text-sm text-white hover:text-purple-200 hover:underline transition-colors bg-white/10 px-3 py-1 rounded-full backdrop-blur-sm"
               >
                 {tag}
               </button>
@@ -106,41 +112,41 @@ export default function LandingPage() {
           </div>
 
           {/* Trust Indicators */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12 pt-8 border-t border-gray-100">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12 pt-8 border-t border-white/20">
             <div className="text-center">
-              <div className="flex items-center justify-center w-12 h-12 bg-blue-50 rounded-lg mx-auto mb-3">
-                <Briefcase className="text-[#0A66C2]" size={24} />
+              <div className="flex items-center justify-center w-12 h-12 bg-white/20 backdrop-blur-sm rounded-lg mx-auto mb-3">
+                <Briefcase className="text-white" size={24} />
               </div>
-              <p className="text-2xl font-bold text-gray-900">2,500+</p>
-              <p className="text-sm text-gray-500">Active Jobs</p>
+              <p className="text-2xl font-bold text-white">2,500+</p>
+              <p className="text-sm text-purple-200">Active Jobs</p>
             </div>
             <div className="text-center">
-              <div className="flex items-center justify-center w-12 h-12 bg-blue-50 rounded-lg mx-auto mb-3">
-                <Building2 className="text-[#0A66C2]" size={24} />
+              <div className="flex items-center justify-center w-12 h-12 bg-white/20 backdrop-blur-sm rounded-lg mx-auto mb-3">
+                <Building2 className="text-white" size={24} />
               </div>
-              <p className="text-2xl font-bold text-gray-900">500+</p>
-              <p className="text-sm text-gray-500">Companies</p>
+              <p className="text-2xl font-bold text-white">500+</p>
+              <p className="text-sm text-purple-200">Companies</p>
             </div>
             <div className="text-center">
-              <div className="flex items-center justify-center w-12 h-12 bg-blue-50 rounded-lg mx-auto mb-3">
-                <Users className="text-[#0A66C2]" size={24} />
+              <div className="flex items-center justify-center w-12 h-12 bg-white/20 backdrop-blur-sm rounded-lg mx-auto mb-3">
+                <Users className="text-white" size={24} />
               </div>
-              <p className="text-2xl font-bold text-gray-900">50,000+</p>
-              <p className="text-sm text-gray-500">Job Seekers</p>
+              <p className="text-2xl font-bold text-white">50,000+</p>
+              <p className="text-sm text-purple-200">Job Seekers</p>
             </div>
             <div className="text-center">
-              <div className="flex items-center justify-center w-12 h-12 bg-blue-50 rounded-lg mx-auto mb-3">
-                <TrendingUp className="text-[#0A66C2]" size={24} />
+              <div className="flex items-center justify-center w-12 h-12 bg-white/20 backdrop-blur-sm rounded-lg mx-auto mb-3">
+                <TrendingUp className="text-white" size={24} />
               </div>
-              <p className="text-2xl font-bold text-gray-900">15,000+</p>
-              <p className="text-sm text-gray-500">Placements</p>
+              <p className="text-2xl font-bold text-white">15,000+</p>
+              <p className="text-sm text-purple-200">Placements</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Featured Jobs Section */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between mb-8">
             <div>
@@ -149,7 +155,7 @@ export default function LandingPage() {
             </div>
             <button
               onClick={() => navigate("/jobs")}
-              className="hidden md:flex items-center gap-2 px-5 py-2.5 border border-[#0A66C2] text-[#0A66C2] font-semibold rounded-md hover:bg-blue-50 transition-colors"
+              className="hidden md:flex items-center gap-2 px-5 py-2.5 border border-[#6C5CE7] text-[#6C5CE7] font-semibold rounded-md hover:bg-purple-50 transition-colors"
             >
               View All
               <ArrowRight size={18} />
@@ -168,16 +174,16 @@ export default function LandingPage() {
                 <div
                   key={job.id}
                   onClick={() => navigate(`/job/${job.id}`)}
-                  className="bg-white rounded-xl p-6 border border-gray-200 hover:border-blue-300 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer group"
+                  className="bg-white rounded-lg p-6 border border-gray-200 hover:border-purple-300 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer group"
                 >
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex-1 min-w-0">
-                      <h3 className="text-lg font-semibold text-gray-900 group-hover:text-[#0A66C2] transition-colors truncate">
+                      <h3 className="text-lg font-semibold text-gray-900 group-hover:text-[#6C5CE7] transition-colors truncate">
                         {job.title}
                       </h3>
                       <p className="text-gray-600 text-sm mt-1">{job.company_name || job.employer}</p>
                     </div>
-                    <span className="ml-3 px-2.5 py-1 bg-blue-50 text-[#0A66C2] text-xs font-medium rounded-md whitespace-nowrap">
+                    <span className="ml-3 px-2.5 py-1 bg-purple-50 text-[#6C5CE7] text-xs font-medium rounded-md whitespace-nowrap">
                       {job.job_type}
                     </span>
                   </div>
@@ -202,7 +208,7 @@ export default function LandingPage() {
                       <IndianRupee size={16} />
                       <span>{formatSalary(job.salary_min, job.salary_max)}</span>
                     </div>
-                    <span className="text-[#0A66C2] font-medium text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
+                    <span className="text-[#6C5CE7] font-medium text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
                       Apply <ArrowRight size={14} />
                     </span>
                   </div>
@@ -215,7 +221,7 @@ export default function LandingPage() {
           <div className="text-center mt-8 md:hidden">
             <button
               onClick={() => navigate("/jobs")}
-              className="px-6 py-3 bg-[#0A66C2] hover:bg-[#004182] text-white font-semibold rounded-md transition-colors shadow-sm"
+              className="px-6 py-3 bg-[#6C5CE7] hover:bg-[#5B4BC4] text-white font-semibold rounded-md transition-colors shadow-sm"
             >
               View All Jobs
             </button>
@@ -224,7 +230,7 @@ export default function LandingPage() {
       </section>
 
       {/* Categories Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-3">Browse by Category</h2>
@@ -233,24 +239,24 @@ export default function LandingPage() {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
-              { name: "Technology", count: "450+ Jobs", icon: Monitor, bgColor: "bg-blue-50", iconBg: "bg-blue-100", textColor: "text-blue-600", iconColor: "text-blue-600" },
-              { name: "Design", count: "280+ Jobs", icon: Palette, bgColor: "bg-purple-50", iconBg: "bg-purple-100", textColor: "text-purple-600", iconColor: "text-purple-600" },
+              { name: "Technology", count: "450+ Jobs", icon: Monitor, bgColor: "bg-purple-50", iconBg: "bg-purple-100", textColor: "text-purple-600", iconColor: "text-purple-600" },
+              { name: "Design", count: "280+ Jobs", icon: Palette, bgColor: "bg-pink-50", iconBg: "bg-pink-100", textColor: "text-pink-600", iconColor: "text-pink-600" },
               { name: "Marketing", count: "320+ Jobs", icon: BarChart3, bgColor: "bg-orange-50", iconBg: "bg-orange-100", textColor: "text-orange-600", iconColor: "text-orange-600" },
               { name: "Sales", count: "380+ Jobs", icon: Briefcase, bgColor: "bg-emerald-50", iconBg: "bg-emerald-100", textColor: "text-emerald-600", iconColor: "text-emerald-600" },
               { name: "Finance", count: "290+ Jobs", icon: Banknote, bgColor: "bg-yellow-50", iconBg: "bg-yellow-100", textColor: "text-yellow-700", iconColor: "text-yellow-600" },
-              { name: "HR", count: "160+ Jobs", icon: Users, bgColor: "bg-pink-50", iconBg: "bg-pink-100", textColor: "text-pink-600", iconColor: "text-pink-600" },
+              { name: "HR", count: "160+ Jobs", icon: Users, bgColor: "bg-blue-50", iconBg: "bg-blue-100", textColor: "text-blue-600", iconColor: "text-blue-600" },
               { name: "Education", count: "220+ Jobs", icon: GraduationCap, bgColor: "bg-indigo-50", iconBg: "bg-indigo-100", textColor: "text-indigo-600", iconColor: "text-indigo-600" },
               { name: "Healthcare", count: "340+ Jobs", icon: Stethoscope, bgColor: "bg-teal-50", iconBg: "bg-teal-100", textColor: "text-teal-600", iconColor: "text-teal-600" },
             ].map((category, index) => (
               <div
                 key={index}
                 onClick={() => navigate(`/jobs?search=${category.name}`)}
-                className="bg-white rounded-xl p-6 text-center cursor-pointer border border-gray-100 hover:border-blue-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
+                className="bg-white rounded-lg p-6 text-center cursor-pointer border border-gray-100 hover:border-purple-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group"
               >
-                <div className={`w-16 h-16 ${category.iconBg} rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                <div className={`w-16 h-16 ${category.iconBg} rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300`}>
                   <category.icon className={`w-8 h-8 ${category.iconColor}`} />
                 </div>
-                <h3 className="font-bold text-gray-900 text-lg group-hover:text-[#0A66C2] transition-colors">{category.name}</h3>
+                <h3 className="font-bold text-gray-900 text-lg group-hover:text-[#6C5CE7] transition-colors">{category.name}</h3>
                 <p className="text-gray-500 mt-1 font-medium">{category.count}</p>
               </div>
             ))}
@@ -259,18 +265,18 @@ export default function LandingPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-[#0A66C2] py-16">
+      <section className="bg-gradient-to-br from-[#6C5CE7] to-[#A29BFE] py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Ready to Find Your Next Opportunity?
           </h2>
-          <p className="text-lg text-blue-100 mb-8 max-w-2xl mx-auto">
+          <p className="text-lg text-purple-100 mb-8 max-w-2xl mx-auto">
             Join thousands of professionals and employers on DreamRoute. Start your journey today.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
               onClick={() => navigate("/auth")}
-              className="px-8 py-3.5 bg-white text-[#0A66C2] font-semibold rounded-md hover:bg-gray-100 transition-colors shadow-sm"
+              className="px-8 py-3.5 bg-white text-[#6C5CE7] font-semibold rounded-md hover:bg-gray-100 transition-colors shadow-sm"
             >
               Get Started Free
             </button>

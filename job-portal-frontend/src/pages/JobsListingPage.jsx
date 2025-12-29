@@ -107,7 +107,7 @@ export default function JobsListingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <h1 className="text-2xl md:text-3xl font-bold text-gray-900">Job Listings</h1>
           <p className="text-gray-600 mt-1">
-            Found <span className="font-semibold text-[#0A66C2]">{totalCount}</span> job opportunities
+            Found <span className="font-semibold text-[#6C5CE7]">{totalCount}</span> job opportunities
           </p>
         </div>
       </div>
@@ -116,7 +116,7 @@ export default function JobsListingPage() {
         <div className="flex gap-6">
           {/* Filter Sidebar - Desktop */}
           <aside className="hidden lg:block w-72 flex-shrink-0">
-            <div className="bg-white rounded-xl border border-gray-200 shadow-sm sticky top-24 h-fit max-h-[calc(100vh-8rem)] overflow-y-auto custom-scrollbar">
+            <div className="bg-white rounded-lg border border-gray-200 shadow-sm sticky top-24 h-fit max-h-[calc(100vh-8rem)] overflow-y-auto custom-scrollbar">
               {/* Filter Header */}
               <div className="px-5 py-4 border-b border-gray-100">
                 <div className="flex items-center justify-between">
@@ -127,7 +127,7 @@ export default function JobsListingPage() {
                   {activeFilterCount > 0 && (
                     <button
                       onClick={resetFilters}
-                      className="text-sm text-[#0A66C2] hover:text-[#004182] font-medium"
+                      className="text-sm text-[#6C5CE7] hover:text-[#5B4BC4] font-medium"
                     >
                       Clear all
                     </button>
@@ -149,7 +149,7 @@ export default function JobsListingPage() {
                       placeholder="Job title or company"
                       value={filters.search}
                       onChange={(e) => handleFilterChange("search", e.target.value)}
-                      className="w-full pl-9 pr-3 py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-[#0A66C2] focus:ring-2 focus:ring-blue-50 transition-all"
+                      className="w-full pl-9 pr-3 py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-[#6C5CE7] focus:ring-2 focus:ring-purple-50 transition-all"
                     />
                   </div>
                 </div>
@@ -166,7 +166,7 @@ export default function JobsListingPage() {
                       placeholder="City or region"
                       value={filters.location}
                       onChange={(e) => handleFilterChange("location", e.target.value)}
-                      className="w-full pl-9 pr-3 py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-[#0A66C2] focus:ring-2 focus:ring-blue-50 transition-all"
+                      className="w-full pl-9 pr-3 py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-[#6C5CE7] focus:ring-2 focus:ring-purple-50 transition-all"
                     />
                   </div>
                 </div>
@@ -179,7 +179,7 @@ export default function JobsListingPage() {
                   <select
                     value={filters.experience}
                     onChange={(e) => handleFilterChange("experience", e.target.value)}
-                    className="w-full px-3 py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-[#0A66C2] focus:ring-2 focus:ring-blue-50 bg-white transition-all"
+                    className="w-full px-3 py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-[#6C5CE7] focus:ring-2 focus:ring-purple-50 bg-white transition-all"
                   >
                     <option value="">All Levels</option>
                     <option value="fresher">Fresher/Entry-level</option>
@@ -198,7 +198,7 @@ export default function JobsListingPage() {
                   <select
                     value={filters.jobType}
                     onChange={(e) => handleFilterChange("jobType", e.target.value)}
-                    className="w-full px-3 py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-[#0A66C2] focus:ring-2 focus:ring-blue-50 bg-white transition-all"
+                    className="w-full px-3 py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-[#6C5CE7] focus:ring-2 focus:ring-purple-50 bg-white transition-all"
                   >
                     <option value="">All Types</option>
                     <option value="full-time">Full Time</option>
@@ -219,14 +219,14 @@ export default function JobsListingPage() {
                       placeholder="Min"
                       value={filters.salaryMin}
                       onChange={(e) => handleFilterChange("salaryMin", e.target.value)}
-                      className="w-1/2 px-3 py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-[#0A66C2] focus:ring-2 focus:ring-blue-50 transition-all"
+                      className="w-1/2 px-3 py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-[#6C5CE7] focus:ring-2 focus:ring-purple-50 transition-all"
                     />
                     <input
                       type="number"
                       placeholder="Max"
                       value={filters.salaryMax}
                       onChange={(e) => handleFilterChange("salaryMax", e.target.value)}
-                      className="w-1/2 px-3 py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-[#0A66C2] focus:ring-2 focus:ring-blue-50 transition-all"
+                      className="w-1/2 px-3 py-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-[#6C5CE7] focus:ring-2 focus:ring-purple-50 transition-all"
                     />
                   </div>
                 </div>
@@ -307,7 +307,7 @@ export default function JobsListingPage() {
                     </button>
                     <button
                       onClick={() => setShowFilters(false)}
-                      className="flex-1 px-4 py-2.5 bg-[#0A66C2] text-white rounded-lg font-medium"
+                      className="flex-1 px-4 py-2.5 bg-[#6C5CE7] text-white rounded-lg font-medium"
                     >
                       Apply
                     </button>
@@ -327,7 +327,7 @@ export default function JobsListingPage() {
               <SlidersHorizontal size={18} />
               Filters
               {activeFilterCount > 0 && (
-                <span className="ml-1 px-2 py-0.5 bg-[#0A66C2] text-white text-xs rounded-full">
+                <span className="ml-1 px-2 py-0.5 bg-[#6C5CE7] text-white text-xs rounded-full">
                   {activeFilterCount}
                 </span>
               )}
@@ -345,12 +345,12 @@ export default function JobsListingPage() {
                   <div
                     key={job.id}
                     onClick={() => navigate(`/job/${job.id}`)}
-                    className="bg-white rounded-xl p-5 md:p-6 border border-gray-200 hover:border-[#0A66C2] hover:shadow-lg transition-all duration-200 cursor-pointer group"
+                    className="bg-white rounded-lg p-5 md:p-6 border border-gray-200 hover:border-purple-300 hover:shadow-lg transition-all duration-200 cursor-pointer group"
                   >
                     {/* Job Header */}
                     <div className="flex items-start justify-between gap-4 mb-4">
                       <div className="flex-1 min-w-0">
-                        <h3 className="text-lg md:text-xl font-bold text-gray-900 group-hover:text-[#0A66C2] transition-colors mb-1">
+                        <h3 className="text-lg md:text-xl font-bold text-gray-900 group-hover:text-[#6C5CE7] transition-colors mb-1">
                           {job.title}
                         </h3>
                         <div className="flex items-center gap-2 text-gray-600">
@@ -358,7 +358,7 @@ export default function JobsListingPage() {
                           <span className="text-sm font-medium">{job.company_name || job.employer}</span>
                         </div>
                       </div>
-                      <span className="px-3 py-1.5 bg-blue-50 text-[#0A66C2] text-xs font-semibold rounded-lg whitespace-nowrap">
+                      <span className="px-3 py-1.5 bg-purple-50 text-[#6C5CE7] text-xs font-semibold rounded-lg whitespace-nowrap">
                         {job.job_type}
                       </span>
                     </div>
@@ -366,7 +366,7 @@ export default function JobsListingPage() {
                     {/* Job Meta - Location & Experience */}
                     <div className="flex flex-wrap gap-4 mb-4">
                       <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-50 rounded-lg">
-                        <MapPin size={16} className="text-[#0A66C2]" />
+                        <MapPin size={16} className="text-[#6C5CE7]" />
                         <span className="text-sm font-medium text-gray-700">{job.location || "Remote"}</span>
                       </div>
                       <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-50 rounded-lg">
@@ -390,7 +390,7 @@ export default function JobsListingPage() {
                           </span>
                         </div>
                       </div>
-                      <span className="flex items-center gap-1.5 text-[#0A66C2] font-semibold text-sm group-hover:gap-2.5 transition-all">
+                      <span className="flex items-center gap-1.5 text-[#6C5CE7] font-semibold text-sm group-hover:gap-2.5 transition-all">
                         View Details
                         <ArrowRight size={16} />
                       </span>
@@ -425,7 +425,7 @@ export default function JobsListingPage() {
                           key={page}
                           onClick={() => setCurrentPage(page)}
                           className={`w-10 h-10 rounded-lg font-medium transition-all ${currentPage === page
-                            ? "bg-[#0A66C2] text-white shadow-sm"
+                            ? "bg-[#6C5CE7] text-white shadow-sm"
                             : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-gray-300"
                             }`}
                         >
@@ -453,7 +453,7 @@ export default function JobsListingPage() {
                 <p className="text-gray-600 mb-4">Try adjusting your filters or search criteria</p>
                 <button
                   onClick={resetFilters}
-                  className="px-5 py-2.5 bg-[#0A66C2] hover:bg-[#004182] text-white font-medium rounded-lg transition-colors shadow-sm"
+                  className="px-5 py-2.5 bg-[#6C5CE7] hover:bg-[#5B4BC4] text-white font-medium rounded-lg transition-colors shadow-sm"
                 >
                   Clear Filters
                 </button>
