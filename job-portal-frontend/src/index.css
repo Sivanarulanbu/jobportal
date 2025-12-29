@@ -152,14 +152,14 @@ textarea {
 
 main {
   flex: 1;
-  background-color: var(--secondary);
+  background-color: var(--bg-secondary);
 }
 
 /* -------------------------------------------------
    Navbar
 ------------------------------------------------- */
 nav {
-  background: var(--secondary);
+  background: white;
   color: var(--dark);
   padding: 0;
   position: sticky;

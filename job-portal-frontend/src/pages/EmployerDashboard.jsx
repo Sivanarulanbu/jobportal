@@ -52,7 +52,7 @@ export default function EmployerDashboard() {
   ];
 
   return (
-    <div className="min-h-[calc(100vh-200px)] py-8 pb-16 bg-white">
+    <div className="min-h-[calc(100vh-200px)] py-8 pb-16">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
         <div className="py-16 px-4 md:px-8 text-center bg-gradient-to-br from-indigo-500/10 to-purple-500/10 rounded-2xl border border-indigo-500/20">
           <h1 className="text-3xl md:text-5xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-br from-indigo-600 to-purple-600 tracking-tight">
