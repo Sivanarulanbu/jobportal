@@ -24,20 +24,20 @@ body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   line-height: 1.6;
-  background-color: #F8F9FA;
-  color: #121224;
+  background-color: #F9FAFB;
+  color: #111827;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Naukri-style Gradient Background */
+/* Light Airy Gradient Background */
 .bg-mesh {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #EBF4FC 0%, #FFFFFF 100%);
   background-image:
-    radial-gradient(at 20% 30%, rgba(102, 126, 234, 0.15) 0px, transparent 50%),
-    radial-gradient(at 80% 20%, rgba(118, 75, 162, 0.15) 0px, transparent 50%),
-    radial-gradient(at 40% 70%, rgba(102, 126, 234, 0.1) 0px, transparent 50%),
-    linear-gradient(180deg, #FFFFFF 0%, #F8F9FA 100%);
+    radial-gradient(at 20% 30%, rgba(74, 144, 226, 0.08) 0px, transparent 50%),
+    radial-gradient(at 80% 20%, rgba(255, 107, 107, 0.05) 0px, transparent 50%),
+    radial-gradient(at 40% 70%, rgba(74, 144, 226, 0.06) 0px, transparent 50%),
+    linear-gradient(180deg, #FFFFFF 0%, #F9FAFB 100%);
 }
 
 h1,
@@ -47,7 +47,7 @@ h4,
 h5,
 h6 {
   font-weight: 600;
-  color: #121224;
+  color: #111827;
   letter-spacing: -0.01em;
 }
 
@@ -71,29 +71,67 @@ textarea {
 }
 
 /* -------------------------------------------------
-   Brand Colors (Naukri Purple Theme)
+   Brand Colors (Light & Airy Professional Theme)
 ------------------------------------------------- */
 :root {
-  --primary: #6C5CE7;
-  /* Naukri Purple */
-  --primary-dark: #5B4BC4;
-  /* Dark Purple */
-  --primary-light: #A29BFE;
-  /* Light Purple */
-  --secondary: #FFFFFF;
-  /* White */
-  --surface: #F8F9FA;
-  /* Light Surface */
-  --accent: #E9ECEF;
-  /* Light Gray */
-  --success: #00C853;
-  --danger: #FF3D57;
-  --warning: #FFA726;
-  --dark: #121224;
+  /* Primary - Soft Professional Blue */
+  --primary: #4A90E2;
+  --primary-dark: #357ABD;
+  --primary-light: #6BA3E8;
+  --primary-50: #EBF4FC;
+
+  /* Secondary - Warm Coral Accent */
+  --secondary: #FF6B6B;
+  --secondary-dark: #E85555;
+  --secondary-light: #FF8787;
+  --secondary-50: #FFF0F0;
+
+  /* Success - Fresh Mint Green */
+  --success: #10B981;
+  --success-dark: #059669;
+  --success-light: #34D399;
+  --success-50: #ECFDF5;
+
+  /* Action/CTA - Vibrant Orange */
+  --action: #F59E0B;
+  --action-dark: #D97706;
+  --action-light: #FBBF24;
+  --action-50: #FEF3C7;
+
+  /* Warning - Sunny Yellow */
+  --warning: #FCD34D;
+  --warning-dark: #F59E0B;
+  --warning-50: #FEF9E7;
+
+  /* Error - Soft Red */
+  --danger: #EF4444;
+  --danger-dark: #DC2626;
+  --danger-50: #FEF2F2;
+
+  /* Backgrounds */
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F9FAFB;
+  --bg-tertiary: #F3F4F6;
+  --bg-hover: #E5E7EB;
+  --surface: #F9FAFB;
+  --accent: #F3F4F6;
+
+  /* Text Colors */
+  --text: #111827;
+  --text-primary: #111827;
+  --text-secondary: #6B7280;
+  --text-tertiary: #9CA3AF;
+  --text-disabled: #D1D5DB;
+
+  /* Borders */
+  --border: #E5E7EB;
+  --border-light: #E5E7EB;
+  --border-medium: #D1D5DB;
+  --border-dark: #9CA3AF;
+
+  /* Legacy Support */
+  --dark: #111827;
   --light: #FFFFFF;
-  --text: #121224;
-  --text-secondary: #6C757D;
-  --border: #DEE2E6;
 }
 
 /* -------------------------------------------------
@@ -155,17 +193,17 @@ footer {
   font-size: 0.9375rem;
   border-radius: 6px;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 1px 3px rgba(108, 92, 231, 0.1);
+  box-shadow: 0 1px 3px rgba(74, 144, 226, 0.1);
 }
 
 .btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(108, 92, 231, 0.2);
+  box-shadow: 0 4px 12px rgba(74, 144, 226, 0.2);
 }
 
 .btn:active {
   transform: translateY(0);
-  box-shadow: 0 1px 3px rgba(108, 92, 231, 0.15);
+  box-shadow: 0 1px 3px rgba(74, 144, 226, 0.15);
 }
 
 .btn-primary {
@@ -185,7 +223,7 @@ footer {
 }
 
 .btn-secondary:hover {
-  background-color: rgba(108, 92, 231, 0.08);
+  background-color: var(--primary-50);
   box-shadow: none;
 }
 
@@ -196,7 +234,7 @@ footer {
 }
 
 .btn-white:hover {
-  background-color: var(--surface);
+  background-color: var(--bg-secondary);
 }
 
 /* -------------------------------------------------
@@ -205,13 +243,13 @@ footer {
 .card {
   background: white;
   border-radius: 8px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-light);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .card:hover {
-  box-shadow: 0 8px 16px rgba(108, 92, 231, 0.12);
+  box-shadow: 0 8px 16px rgba(74, 144, 226, 0.12);
   border-color: var(--primary-light);
   transform: translateY(-2px);
 }

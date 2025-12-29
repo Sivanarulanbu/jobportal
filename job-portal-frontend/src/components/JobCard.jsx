@@ -18,18 +18,18 @@ export default function JobCard({ job }) {
 
   return (
     <div
-      className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg hover:border-purple-300 hover:-translate-y-1 transition-all duration-300 cursor-pointer group relative overflow-hidden"
+      className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg hover:border-blue-300 hover:-translate-y-1 transition-all duration-300 cursor-pointer group relative overflow-hidden"
       onClick={() => navigate(`/job/${job.id}`)}
     >
       <div className="flex justify-between items-start gap-3 mb-3">
         <div className="flex-1 min-w-0">
-          <h3 className="text-lg font-semibold text-gray-900 group-hover:text-[#6C5CE7] transition-colors truncate">
+          <h3 className="text-lg font-semibold text-gray-900 group-hover:text-[#4A90E2] transition-colors truncate">
             {job.title}
           </h3>
           <p className="text-gray-600 text-sm mt-0.5">{job.company}</p>
         </div>
         <div className="flex flex-col items-end gap-1.5">
-          <span className="inline-block bg-purple-50 text-[#6C5CE7] px-2.5 py-1 rounded-md text-xs font-medium whitespace-nowrap">
+          <span className="inline-block bg-blue-50 text-[#4A90E2] px-2.5 py-1 rounded-md text-xs font-medium whitespace-nowrap">
             {job.job_type}
           </span>
           {job.experience_required && (
@@ -62,7 +62,7 @@ export default function JobCard({ job }) {
             </div>
           )}
         </div>
-        <button className="flex items-center gap-1.5 bg-[#6C5CE7] hover:bg-[#5B4BC4] text-white px-4 py-2 rounded-md text-sm font-medium transition-colors shadow-sm group-hover:gap-2">
+        <button className="flex items-center gap-1.5 bg-[#4A90E2] hover:bg-[#357ABD] text-white px-4 py-2 rounded-md text-sm font-medium transition-colors shadow-sm group-hover:gap-2">
           View Details
           <ArrowRight size={14} />
         </button>
