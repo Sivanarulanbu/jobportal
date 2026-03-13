@@ -68,9 +68,12 @@ python ../create_superuser.py || true
 echo "Collecting static files..."
 python manage.py collectstatic --noinput || true
 
+echo "Patching Nginx config to listen on port ${PORT:-80}..."
+sed -i "s/listen 80;/listen ${PORT:-80};/g" /etc/nginx/nginx.conf
+
 echo "Starting Gunicorn..."
-# Start Gunicorn in background
-gunicorn job_portal_backend.wsgi:application --bind 127.0.0.1:8000 --workers 4 --timeout 120 --access-logfile - &
+# Start Gunicorn in background with 2 workers for better memory stability on free tier
+gunicorn job_portal_backend.wsgi:application --bind 127.0.0.1:8000 --workers 2 --timeout 120 --access-logfile - &
 GUNICORN_PID=$!
 
 echo "Starting Nginx..."
