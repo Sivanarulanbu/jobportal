@@ -29,3 +29,15 @@ services:
         value: 'admin@example.com'
       - key: DJANGO_SUPERUSER_PASSWORD
         value: 'admin'
+      - key: EMAIL_HOST
+        value: smtp-relay.brevo.com
+      - key: EMAIL_PORT
+        value: "587"
+      - key: EMAIL_HOST_USER
+        value: "" # Set in Render Dashboard
+      - key: EMAIL_HOST_PASSWORD
+        value: "" # Set in Render Dashboard
+      - key: DEFAULT_FROM_EMAIL
+        value: "Jobportal <krishnananbu99@gmail.com>"
+      - key: SIMPLE_JWT_SIGNING_KEY
+        generateValue: true
