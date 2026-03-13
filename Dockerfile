@@ -63,7 +63,7 @@ echo "Running migrations..."
 python manage.py migrate --noinput || true
 
 echo "Checking superuser..."
-python ../create_superuser.py || true
+python create_superuser.py || true
 
 echo "Collecting static files..."
 python manage.py collectstatic --noinput || true
