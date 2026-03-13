@@ -16,7 +16,7 @@ services:
       - key: DB_USER
         value: postgres
       - key: DB_PASSWORD
-        value: 7010155224@27
+        value: Sivanarul@21
       - key: DB_HOST
         value: db.fhgwcrmlwurlomrtkfrt.supabase.co
       - key: DB_PORT
